@@ -11,13 +11,16 @@ const navLinks = [
 ];
 
 function LLLogo() {
+  const logoSrc = `${import.meta.env.BASE_URL}assets/lenguaje-labs-logo.jpg`;
+
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Lenguaje Labs logo">
-      <rect x="4" y="4" width="5" height="20" rx="1.5" fill="#3B82F6" />
-      <rect x="4" y="20" width="11" height="4" rx="1.5" fill="#3B82F6" />
-      <rect x="17" y="4" width="5" height="20" rx="1.5" fill="#60A5FA" />
-      <rect x="17" y="20" width="11" height="4" rx="1.5" fill="#60A5FA" />
-    </svg>
+    <img
+      src={logoSrc}
+      alt="Lenguaje Labs logo"
+      className="h-8 w-8 rounded-lg object-cover"
+      width="32"
+      height="32"
+    />
   );
 }
 
