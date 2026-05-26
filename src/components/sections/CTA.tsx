@@ -69,7 +69,7 @@ export default function CTA() {
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/federico-orozco-687b5431/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border/60 text-foreground/80 font-semibold text-sm hover:border-primary/50 hover:text-foreground transition-all"
