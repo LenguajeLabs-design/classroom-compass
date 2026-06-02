@@ -28,6 +28,7 @@ const milestones = [
 export default function Research() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const presentationUrl = `${import.meta.env.BASE_URL}resources/how-i-build-educational-tools-with-ai.pdf`;
 
   return (
     <section
@@ -64,14 +65,16 @@ export default function Research() {
             </h2>
           </motion.div>
           <motion.a
-            href="mailto:lenguajelabs@proton.me"
+            href={presentationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group whitespace-nowrap"
             data-testid="research-view-all"
           >
-            View all research
+            Download presentation
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="group-hover:translate-x-0.5 transition-transform"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </motion.a>
         </div>

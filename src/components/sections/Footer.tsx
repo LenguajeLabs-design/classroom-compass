@@ -15,6 +15,8 @@ function LLLogo() {
   );
 }
 
+const presentationUrl = `${import.meta.env.BASE_URL}resources/how-i-build-educational-tools-with-ai.pdf`;
+
 const footerNav = [
   {
     heading: "EXPLORE",
@@ -39,7 +41,7 @@ const footerNav = [
     links: [
       { label: "About", href: "#mission" },
       { label: "Mission", href: "#mission" },
-      { label: "Presentations", href: "#" },
+      { label: "How I Build Tools", href: presentationUrl, external: true },
       { label: "Lab Notes", href: "#" },
     ],
   },
@@ -118,6 +120,8 @@ export default function Footer() {
                     <li key={link.label}>
                       <a
                         href={link.href}
+                        target={link.external ? "_blank" : undefined}
+                        rel={link.external ? "noopener noreferrer" : undefined}
                         className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                         data-testid={`footer-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                         onClick={(e) => {
