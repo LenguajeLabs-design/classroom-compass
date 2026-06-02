@@ -17,35 +17,42 @@ const showcaseItems = [
     title: "EALDesk Elementary",
     subtitle: "Planning tools for multilingual elementary classrooms.",
     url: "https://lenguajelabs-design.github.io/EALDesk-Elementary/",
-    image: "/app-screenshots/ealdesk-elementary.png",
+    image: `${import.meta.env.BASE_URL}app-screenshots/ealdesk-elementary.png`,
     accent: "#3B82F6",
   },
   {
     title: "WIDA Family Guide",
     subtitle: "Family-friendly explanations of English proficiency levels.",
     url: "https://wida-family-guide.replit.app/",
-    image: "/app-screenshots/wida-family-guide.png",
+    image: `${import.meta.env.BASE_URL}app-screenshots/wida-family-guide.png`,
     accent: "#38BDF8",
   },
   {
     title: "Scaffold",
     subtitle: "AI-supported EAL lesson planning with school access.",
     url: "https://scaffold.replit.app/",
-    image: "/app-screenshots/scaffold.png",
+    image: `${import.meta.env.BASE_URL}app-screenshots/scaffold.png`,
     accent: "#1E3A8A",
   },
   {
     title: "Li Li Chinese",
     subtitle: "A focused practice space for building Chinese speaking confidence.",
     url: "https://speak-chinese-now.replit.app/",
-    image: "/app-screenshots/speak-chinese-now.png",
+    image: `${import.meta.env.BASE_URL}app-screenshots/speak-chinese-now.png`,
     accent: "#14B8A6",
+  },
+  {
+    title: "Hangul Flow",
+    subtitle: "Korean practice flows for building Hangul fluency.",
+    url: "https://hangul-flow.replit.app/",
+    image: `${import.meta.env.BASE_URL}app-screenshots/hangul-flow.png`,
+    accent: "#F97316",
   },
   {
     title: "EALDesk",
     subtitle: "A broader toolkit for multilingual learning workflows.",
     url: "https://lenguajelabs-design.github.io/EALDesk/",
-    image: "/app-screenshots/ealdesk.png",
+    image: `${import.meta.env.BASE_URL}app-screenshots/ealdesk.png`,
     accent: "#8B5CF6",
   },
 ];
@@ -132,7 +139,7 @@ function AppShowcase() {
           </div>
         </a>
 
-        <div className="grid grid-cols-5 border-t border-border/60 bg-card/80">
+        <div className="grid grid-cols-3 border-t border-border/60 bg-card/80 sm:grid-cols-6">
           {showcaseItems.map((item, index) => (
             <button
               key={item.title}
