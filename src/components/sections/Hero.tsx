@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -12,26 +12,148 @@ const fadeUp = {
   }),
 };
 
-function ProductCard({ title, subtitle, accentColor, delay }: { title: string; subtitle: string; accentColor: string; delay: number }) {
+const showcaseItems = [
+  {
+    title: "EALDesk Elementary",
+    subtitle: "Planning tools for multilingual elementary classrooms.",
+    url: "https://lenguajelabs-design.github.io/EALDesk-Elementary/",
+    image: "/app-screenshots/ealdesk-elementary.png",
+    accent: "#3B82F6",
+  },
+  {
+    title: "WIDA Family Guide",
+    subtitle: "Family-friendly explanations of English proficiency levels.",
+    url: "https://wida-family-guide.replit.app/",
+    image: "/app-screenshots/wida-family-guide.png",
+    accent: "#38BDF8",
+  },
+  {
+    title: "Scaffold",
+    subtitle: "AI-supported EAL lesson planning with school access.",
+    url: "https://scaffold.replit.app/",
+    image: "/app-screenshots/scaffold.png",
+    accent: "#1E3A8A",
+  },
+  {
+    title: "Li Li Chinese",
+    subtitle: "A focused practice space for building Chinese speaking confidence.",
+    url: "https://speak-chinese-now.replit.app/",
+    image: "/app-screenshots/speak-chinese-now.png",
+    accent: "#14B8A6",
+  },
+  {
+    title: "EALDesk",
+    subtitle: "A broader toolkit for multilingual learning workflows.",
+    url: "https://lenguajelabs-design.github.io/EALDesk/",
+    image: "/app-screenshots/ealdesk.png",
+    accent: "#8B5CF6",
+  },
+];
+
+function AppShowcase() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const activeItem = showcaseItems[activeIndex];
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % showcaseItems.length);
+    }, 5000);
+
+    return () => window.clearInterval(interval);
+  }, [isPaused]);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24, scale: 0.97 }}
+      initial={{ opacity: 0, y: 28, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm p-4 shadow-xl"
-      style={{ boxShadow: `0 4px 32px -8px ${accentColor}22` }}
-      data-testid={`hero-product-card-${title.toLowerCase().replace(/\s+/g, "-")}`}
+      transition={{ duration: 0.8, delay: 0.45, ease: EASE }}
+      className="relative"
+      data-testid="hero-app-showcase"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
     >
-      <div className="flex items-start gap-3">
-        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${accentColor}22`, border: `1px solid ${accentColor}44` }}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="3.5" fill={accentColor} />
-            <path d="M8 2v1M8 13v1M2 8h1M13 8h1" stroke={accentColor} strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
-          </svg>
-        </div>
-        <div>
-          <p className="text-xs font-semibold text-foreground">{title}</p>
-          <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{subtitle}</p>
+      <div
+        className="absolute -inset-6 rounded-[2rem] opacity-35 blur-3xl"
+        style={{ background: `radial-gradient(circle at 50% 25%, ${activeItem.accent}66, transparent 68%)` }}
+      />
+
+      <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/70 shadow-2xl backdrop-blur-sm">
+        <a
+          href={activeItem.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block"
+          aria-label={`Open ${activeItem.title}`}
+          data-testid="hero-showcase-link"
+        >
+          <div className="flex items-center justify-between border-b border-border/60 bg-background/75 px-4 py-3">
+            <div className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
+            </div>
+            <span className="max-w-60 truncate text-xs font-medium text-muted-foreground">
+              {activeItem.url.replace("https://", "").replace(/\/$/, "")}
+            </span>
+          </div>
+
+          <div className="relative aspect-[1.45] overflow-hidden bg-background">
+            {showcaseItems.map((item, index) => (
+              <motion.img
+                key={item.image}
+                src={item.image}
+                alt={`${item.title} application screenshot`}
+                className="absolute inset-0 h-full w-full object-cover object-top"
+                initial={false}
+                animate={{ opacity: index === activeIndex ? 1 : 0, scale: index === activeIndex ? 1 : 1.02 }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
+              />
+            ))}
+
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent p-5 pt-20">
+              <p className="text-xs font-bold uppercase text-primary">Live tool</p>
+              <div className="mt-1 flex items-end justify-between gap-4">
+                <div>
+                  <h2 className="text-xl font-bold text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    {activeItem.title}
+                  </h2>
+                  <p className="mt-1 max-w-sm text-sm leading-relaxed text-muted-foreground">{activeItem.subtitle}</p>
+                </div>
+                <span className="hidden h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-primary/40 bg-primary/15 text-primary transition-transform group-hover:translate-x-0.5 sm:flex">
+                  <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <div className="grid grid-cols-5 border-t border-border/60 bg-card/80">
+          {showcaseItems.map((item, index) => (
+            <button
+              key={item.title}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className="relative min-h-14 px-2 py-3 text-left transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
+              aria-label={`Show ${item.title}`}
+              aria-pressed={index === activeIndex}
+              data-testid={`hero-showcase-tab-${item.title.toLowerCase().replace(/\s+/g, "-")}`}
+            >
+              <span
+                className={`block truncate text-[11px] font-semibold ${index === activeIndex ? "text-foreground" : "text-muted-foreground"}`}
+              >
+                {item.title}
+              </span>
+              <span
+                className="absolute inset-x-2 bottom-1 h-0.5 rounded-full transition-opacity"
+                style={{ backgroundColor: item.accent, opacity: index === activeIndex ? 1 : 0 }}
+              />
+            </button>
+          ))}
         </div>
       </div>
     </motion.div>
@@ -163,39 +285,8 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          <div className="relative hidden lg:flex flex-col gap-3" data-testid="hero-product-cards">
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-background/20 pointer-events-none z-10 rounded-3xl" />
-            <div className="grid grid-cols-2 gap-3">
-              <div className="flex flex-col gap-3">
-                <ProductCard title="WIDA Family Guide" subtitle="Understand your child's English proficiency level." accentColor="#3B82F6" delay={0.5} />
-                <ProductCard title="Li Li Chinese" subtitle="A calm space to turn Chinese into real speaking." accentColor="#0D9488" delay={0.7} />
-              </div>
-              <div className="flex flex-col gap-3 mt-8">
-                <ProductCard title="Scaffold" subtitle="AI-powered EAL lesson planning assistant." accentColor="#8B5CF6" delay={0.6} />
-                <ProductCard title="Hangul Flow" subtitle="Master Korean through personalized AI stories." accentColor="#7C3AED" delay={0.8} />
-              </div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-              className="mx-auto w-full max-w-xs rounded-2xl border border-border/60 bg-card/40 backdrop-blur-sm p-4"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-semibold text-foreground">Language Level</span>
-                <span className="text-xs text-primary font-bold">Level 3</span>
-              </div>
-              <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5, 6].map((n) => (
-                  <div
-                    key={n}
-                    className={`flex-1 h-1.5 rounded-full transition-colors ${n <= 3 ? "bg-primary" : "bg-border/40"}`}
-                  />
-                ))}
-              </div>
-              <p className="text-xs text-muted-foreground mt-1.5">Developing</p>
-            </motion.div>
+          <div className="relative hidden lg:block" data-testid="hero-product-cards">
+            <AppShowcase />
           </div>
         </div>
       </motion.div>
