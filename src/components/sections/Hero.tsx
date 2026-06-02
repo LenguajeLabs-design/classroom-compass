@@ -85,7 +85,7 @@ function AppShowcase() {
       onBlur={() => setIsPaused(false)}
     >
       <div
-        className="absolute -inset-6 rounded-[2rem] opacity-35 blur-3xl"
+        className="absolute -inset-8 rounded-[2.25rem] opacity-35 blur-3xl"
         style={{ background: `radial-gradient(circle at 50% 25%, ${activeItem.accent}66, transparent 68%)` }}
       />
 
@@ -98,7 +98,7 @@ function AppShowcase() {
           aria-label={`Open ${activeItem.title}`}
           data-testid="hero-showcase-link"
         >
-          <div className="flex items-center justify-between border-b border-border/60 bg-background/75 px-4 py-3">
+          <div className="flex items-center justify-between border-b border-border/60 bg-background/75 px-4 py-2.5">
             <div className="flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
@@ -109,7 +109,7 @@ function AppShowcase() {
             </span>
           </div>
 
-          <div className="relative aspect-[1.45] overflow-hidden bg-background">
+          <div className="relative aspect-[1.56] overflow-hidden bg-background">
             {showcaseItems.map((item, index) => (
               <motion.img
                 key={item.image}
@@ -122,7 +122,7 @@ function AppShowcase() {
               />
             ))}
 
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent p-5 pt-20">
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/65 to-transparent p-5 pt-24">
               <p className="text-xs font-bold uppercase text-primary">Live tool</p>
               <div className="mt-1 flex items-end justify-between gap-4">
                 <div>
@@ -145,7 +145,7 @@ function AppShowcase() {
               key={item.title}
               type="button"
               onClick={() => setActiveIndex(index)}
-              className="relative min-h-14 px-2 py-3 text-left transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
+              className="relative min-h-12 px-2 py-2.5 text-left transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
               aria-label={`Show ${item.title}`}
               aria-pressed={index === activeIndex}
               data-testid={`hero-showcase-tab-${item.title.toLowerCase().replace(/\s+/g, "-")}`}
@@ -177,7 +177,7 @@ export default function Hero() {
     <section
       ref={containerRef}
       id="lab"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-14"
       data-testid="hero-section"
     >
       <motion.div
@@ -203,15 +203,15 @@ export default function Hero() {
 
       <motion.div
         style={{ y: contentY }}
-        className="relative z-10 max-w-7xl mx-auto px-6 w-full py-20 md:py-32"
+        className="relative z-10 mx-auto w-full max-w-[92rem] px-6 py-16 md:py-24"
       >
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div>
+        <div className="grid items-center gap-10 lg:grid-cols-[0.84fr_1.16fr] xl:grid-cols-[0.74fr_1.26fr] xl:gap-12">
+          <div className="max-w-xl">
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 mb-8"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5"
               data-testid="hero-badge"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
@@ -223,7 +223,7 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               custom={0}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-foreground mb-6"
+              className="mb-5 text-5xl font-bold leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-[4rem] xl:text-[4.35rem]"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               data-testid="hero-headline"
             >
@@ -239,7 +239,7 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               custom={1}
-              className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg"
+              className="mb-7 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg"
               data-testid="hero-subheadline"
             >
               We build practical tools and systems that empower educators, support multilingual learners, and connect families to clarity.
@@ -250,7 +250,7 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               custom={2}
-              className="flex flex-wrap gap-3 mb-12"
+              className="mb-10 flex flex-wrap gap-3"
               data-testid="hero-ctas"
             >
               <a
@@ -292,7 +292,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          <div className="relative hidden lg:block" data-testid="hero-product-cards">
+          <div className="relative hidden lg:block lg:-mr-4 xl:-mr-8" data-testid="hero-product-cards">
             <AppShowcase />
           </div>
         </div>
