@@ -1,34 +1,10 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-
-const milestones = [
-  {
-    id: "action",
-    title: "Action Research",
-    body: "Ongoing research in multilingual classrooms across Asia.",
-    date: "Ongoing",
-    status: "ongoing",
-  },
-  {
-    id: "mlrc",
-    title: "MLRC Capstone Research",
-    body: "Investigating family-facing tools that support language development.",
-    date: "Summer 2026",
-    status: "ongoing",
-  },
-  {
-    id: "workshops",
-    title: "Workshops & PD",
-    body: "Hands-on professional learning for schools and districts.",
-    date: "Ongoing",
-    status: "ongoing",
-  },
-];
+import { researchMilestones, siteResources } from "@/content/site";
 
 export default function Research() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const presentationUrl = `${import.meta.env.BASE_URL}resources/how-i-build-educational-tools-with-ai.pdf`;
 
   return (
     <section
@@ -65,7 +41,7 @@ export default function Research() {
             </h2>
           </motion.div>
           <motion.a
-            href={presentationUrl}
+            href={siteResources.presentationPdf}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0 }}
@@ -89,7 +65,7 @@ export default function Research() {
           />
 
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            {milestones.map((m, i) => (
+            {researchMilestones.map((m, i) => (
               <motion.div
                 key={m.id}
                 initial={{ opacity: 0, y: 24 }}
@@ -112,6 +88,20 @@ export default function Research() {
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     {m.body}
                   </p>
+                  {m.href && m.linkLabel && (
+                    <a
+                      href={m.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-foreground transition-colors"
+                      data-testid={`research-link-${m.id}`}
+                    >
+                      {m.linkLabel}
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                        <path d="M2 6h8M6.5 3 9.5 6 6.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </a>
+                  )}
                   {m.status === "ongoing" && (
                     <div className="mt-3 flex items-center gap-1.5">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />

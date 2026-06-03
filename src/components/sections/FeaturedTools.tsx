@@ -1,135 +1,90 @@
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { motion, useInView } from "framer-motion";
+import { featuredTools, type ToolId } from "@/content/site";
 
-const scaffoldScreenshot = "/opengraph.jpg";
+function getToolIcon(toolId: ToolId): ReactNode {
+  switch (toolId) {
+    case "wida-family-guide":
+      return (
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <rect x="3" y="3" width="7" height="9" rx="1.5" stroke="#3B82F6" strokeWidth="1.4"/>
+          <rect x="12" y="3" width="7" height="9" rx="1.5" stroke="#3B82F6" strokeWidth="1.4"/>
+          <path d="M3 16h7M12 16h7" stroke="#3B82F6" strokeWidth="1.4" strokeLinecap="round"/>
+          <path d="M3 19h5M14 19h5" stroke="#3B82F6" strokeWidth="1.2" strokeLinecap="round" opacity="0.5"/>
+        </svg>
+      );
+    case "scaffold":
+      return (
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M6 18V8M6 8l3-3M6 8l-3-3" stroke="#3B82F6" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+          <rect x="10" y="6" width="9" height="2.5" rx="1.25" fill="#3B82F6" opacity="0.7"/>
+          <rect x="10" y="10.5" width="7" height="2" rx="1" fill="#3B82F6" opacity="0.5"/>
+          <rect x="10" y="14.5" width="5" height="2" rx="1" fill="#3B82F6" opacity="0.3"/>
+        </svg>
+      );
+    case "li-li-chinese":
+      return (
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <circle cx="11" cy="11" r="7.5" stroke="#0D9488" strokeWidth="1.4"/>
+          <text x="11" y="15" textAnchor="middle" fontSize="9" fill="#0D9488" fontFamily="serif">李</text>
+        </svg>
+      );
+    case "hangul-flow":
+      return (
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <rect x="4" y="4" width="6" height="6" rx="1.5" stroke="#7C3AED" strokeWidth="1.4"/>
+          <rect x="12" y="4" width="6" height="6" rx="1.5" stroke="#7C3AED" strokeWidth="1.4"/>
+          <rect x="4" y="12" width="6" height="6" rx="1.5" stroke="#7C3AED" strokeWidth="1.4"/>
+          <rect x="12" y="12" width="6" height="6" rx="1.5" stroke="#7C3AED" strokeWidth="1.4"/>
+        </svg>
+      );
+  }
+}
 
-const tools = [
-  {
-    id: "wida-family-guide",
-    title: "WIDA Family Guide",
-    subtitle: "Understand your child's English proficiency level and how to support their learning journey — available in multiple languages.",
-    tags: ["Family", "EAL"],
-    accent: "#1E3A5F",
-    url: "https://wida-family-guide.replit.app/",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <rect x="3" y="3" width="7" height="9" rx="1.5" stroke="#3B82F6" strokeWidth="1.4"/>
-        <rect x="12" y="3" width="7" height="9" rx="1.5" stroke="#3B82F6" strokeWidth="1.4"/>
-        <path d="M3 16h7M12 16h7" stroke="#3B82F6" strokeWidth="1.4" strokeLinecap="round"/>
-        <path d="M3 19h5M14 19h5" stroke="#3B82F6" strokeWidth="1.2" strokeLinecap="round" opacity="0.5"/>
-      </svg>
-    ),
-    preview: (
-      <div className="p-3 h-full flex flex-col justify-between">
-        <div className="flex items-center gap-2 mb-2">
-          <div className="w-5 h-5 rounded bg-[#1E3A5F] flex items-center justify-center">
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="1" y="1" width="3.5" height="4" rx="0.5" fill="white"/><rect x="5.5" y="1" width="3.5" height="4" rx="0.5" fill="white"/></svg>
-          </div>
-          <span className="text-[10px] font-bold tracking-wider text-foreground/70">WIDA FAMILY GUIDE</span>
+function getToolPreview(toolId: ToolId, screenshotSrc: string, screenshotAlt: string): ReactNode {
+  switch (toolId) {
+    case "wida-family-guide":
+      return (
+        <div className="h-full w-full overflow-hidden">
+          <img
+            src={screenshotSrc}
+            alt={screenshotAlt}
+            className="w-full h-full object-cover object-top"
+          />
         </div>
-        <div className="flex gap-1 mb-2">
-          {["1\nEntering", "2\nBeginning", "3\nDeveloping", "4\nExpanding", "5\nBridging", "6\nReaching"].map((l, i) => (
-            <div key={i} className={`flex-1 rounded text-[7px] text-center py-1 leading-tight font-medium transition-colors ${i === 0 ? "bg-[#1E3A5F] text-white" : "bg-border/30 text-muted-foreground"}`}>
-              {l.split("\n").map((part, j) => <div key={j}>{part}</div>)}
-            </div>
-          ))}
+      );
+    case "scaffold":
+      return (
+        <div className="h-full w-full overflow-hidden">
+          <img
+            src={screenshotSrc}
+            alt={screenshotAlt}
+            className="w-full h-full object-cover object-top"
+          />
         </div>
-        <div className="rounded bg-card/60 border border-border/40 px-2 py-1.5">
-          <p className="text-[9px] font-bold text-foreground/80 mb-0.5">LEVEL 1 · ENTERING</p>
-          <p className="text-[8px] text-muted-foreground leading-tight">Just starting out — every new word is a win!</p>
+      );
+    case "li-li-chinese":
+      return (
+        <div className="h-full w-full overflow-hidden">
+          <img
+            src={screenshotSrc}
+            alt={screenshotAlt}
+            className="w-full h-full object-cover object-top"
+          />
         </div>
-      </div>
-    ),
-  },
-  {
-    id: "scaffold",
-    title: "Scaffold",
-    subtitle: "AI-powered EAL lesson planning assistant. Enter a school access code and generate differentiated lessons in minutes.",
-    tags: ["AI", "Lesson Planning"],
-    accent: "#1E3A8A",
-    url: "https://scaffold.replit.app/",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <path d="M6 18V8M6 8l3-3M6 8l-3-3" stroke="#3B82F6" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-        <rect x="10" y="6" width="9" height="2.5" rx="1.25" fill="#3B82F6" opacity="0.7"/>
-        <rect x="10" y="10.5" width="7" height="2" rx="1" fill="#3B82F6" opacity="0.5"/>
-        <rect x="10" y="14.5" width="5" height="2" rx="1" fill="#3B82F6" opacity="0.3"/>
-      </svg>
-    ),
-    preview: (
-      <div className="h-full w-full overflow-hidden">
-        <img
-          src={scaffoldScreenshot}
-          alt="Scaffold lesson planner UI"
-          className="w-full h-full object-cover object-top"
-        />
-      </div>
-    ),
-  },
-  {
-    id: "li-li-chinese",
-    title: "Li Li Chinese",
-    subtitle: "A calm space to turn Chinese into real speaking. Save words, track progress, and build confidence at your own pace.",
-    tags: ["Chinese", "Speaking"],
-    accent: "#0D9488",
-    url: "https://speak-chinese-now.replit.app/",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <circle cx="11" cy="11" r="7.5" stroke="#0D9488" strokeWidth="1.4"/>
-        <text x="11" y="15" textAnchor="middle" fontSize="9" fill="#0D9488" fontFamily="serif">李</text>
-      </svg>
-    ),
-    preview: (
-      <div className="p-3 h-full flex flex-col items-center justify-center gap-2">
-        <div className="w-10 h-10 rounded-2xl bg-white shadow flex items-center justify-center text-lg">
-          <span style={{ fontFamily: "serif" }}>李</span>
+      );
+    case "hangul-flow":
+      return (
+        <div className="h-full w-full overflow-hidden">
+          <img
+            src={screenshotSrc}
+            alt={screenshotAlt}
+            className="w-full h-full object-cover object-top"
+          />
         </div>
-        <div className="text-center">
-          <p className="text-xs font-bold text-foreground/90" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            <span className="text-foreground/70">Li Li </span>
-            <span className="text-teal-400">Chinese</span>
-          </p>
-          <p className="text-[8px] text-muted-foreground mt-0.5">A calm space to turn Chinese into real speaking.</p>
-        </div>
-        <div className="w-full rounded-full bg-teal-500 py-1 text-center text-[9px] font-semibold text-white">Log in to get started</div>
-      </div>
-    ),
-  },
-  {
-    id: "hangul-flow",
-    title: "Hangul Flow",
-    subtitle: "Master Korean through AI-generated reading passages tailored to your level and interests, with instant vocabulary support.",
-    tags: ["Korean", "AI Reading"],
-    accent: "#7C3AED",
-    url: "https://hangul-flow.replit.app/",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <rect x="4" y="4" width="6" height="6" rx="1.5" stroke="#7C3AED" strokeWidth="1.4"/>
-        <rect x="12" y="4" width="6" height="6" rx="1.5" stroke="#7C3AED" strokeWidth="1.4"/>
-        <rect x="4" y="12" width="6" height="6" rx="1.5" stroke="#7C3AED" strokeWidth="1.4"/>
-        <rect x="12" y="12" width="6" height="6" rx="1.5" stroke="#7C3AED" strokeWidth="1.4"/>
-      </svg>
-    ),
-    preview: (
-      <div className="h-full relative overflow-hidden">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #14b8a6 0%, #7c3aed 60%, #ec4899 100%)", opacity: 0.85 }} />
-        <div className="relative p-3 h-full flex flex-col justify-between">
-          <div className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-white/20 w-fit">
-            <div className="w-1.5 h-1.5 rounded-full bg-white/80" />
-            <span className="text-[8px] text-white/90 font-medium">AI-Powered Reading</span>
-          </div>
-          <div>
-            <p className="text-white font-bold text-xs leading-snug mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Master Korean through personalized stories.</p>
-            <div className="flex gap-1">
-              <div className="flex-1 rounded bg-white/20 py-0.5 text-center text-[8px] text-white font-medium">Generate</div>
-              <div className="flex-1 rounded bg-white/10 border border-white/30 py-0.5 text-center text-[8px] text-white">Library</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-];
+      );
+  }
+}
 
 const containerVariants = {
   hidden: {},
@@ -198,7 +153,7 @@ export default function FeaturedTools() {
           className="grid md:grid-cols-2 lg:grid-cols-4 gap-5"
           data-testid="tools-grid"
         >
-          {tools.map((tool) => (
+          {featuredTools.map((tool) => (
             <motion.div
               key={tool.id}
               variants={cardVariants}
@@ -209,13 +164,13 @@ export default function FeaturedTools() {
               data-testid={`tool-card-${tool.id}`}
             >
               <div className="h-36 bg-gradient-to-br from-card to-background/60 border-b border-border/40 overflow-hidden">
-                {tool.preview}
+                {getToolPreview(tool.id, tool.screenshotSrc, tool.screenshotAlt)}
               </div>
 
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${tool.accent}15`, border: `1px solid ${tool.accent}30` }}>
-                    {tool.icon}
+                    {getToolIcon(tool.id)}
                   </div>
                   <h3 className="font-semibold text-sm text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                     {tool.title}

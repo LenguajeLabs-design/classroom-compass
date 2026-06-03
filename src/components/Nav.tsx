@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { label: "The Lab", href: "#lab" },
-  { label: "Research", href: "#research" },
-  { label: "Frameworks", href: "#tools" },
-  { label: "Integration", href: "#integration" }, 
-  { label: "About", href: "#mission" },
-  { label: "Contact", href: "#contact" },
-];
+import { navLinks } from "@/content/site";
 
 function LLLogo() {
   const logoSrc = `${import.meta.env.BASE_URL}assets/lenguaje-labs-logo.jpg`;
