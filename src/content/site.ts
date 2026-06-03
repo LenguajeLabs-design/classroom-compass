@@ -85,8 +85,8 @@ export const featuredTools: FeaturedTool[] = [
     tags: ["AI", "Lesson Planning"],
     accent: "#1E3A8A",
     url: "https://scaffold.replit.app/",
-    screenshotSrc: `${basePath}app-screenshots/scaffold.png`,
-    screenshotAlt: "Scaffold lesson planner screenshot",
+    screenshotSrc: `${basePath}app-screenshots/scaffold-lesson-output.png`,
+    screenshotAlt: "Scaffold lesson output screenshot",
   },
   {
     id: "li-li-chinese",

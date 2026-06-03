@@ -55,12 +55,83 @@ function getToolPreview(toolId: ToolId, screenshotSrc: string, screenshotAlt: st
       );
     case "scaffold":
       return (
-        <div className="h-full w-full overflow-hidden">
-          <img
-            src={screenshotSrc}
-            alt={screenshotAlt}
-            className="w-full h-full object-cover object-top"
-          />
+        <div className="h-full w-full bg-[#F4F7FB] p-4 text-slate-900">
+          <div className="rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_24px_80px_-36px_rgba(15,23,42,0.45)] overflow-hidden">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3">
+              <div className="flex items-center gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+                <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              </div>
+              <div className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-blue-800">
+                Lesson Output
+              </div>
+            </div>
+
+            <div className="grid gap-3 p-4">
+              <div className="grid gap-3 md:grid-cols-2">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Content objective</p>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-800">
+                    Identify key events and explain how a character responds to a problem using evidence.
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Language objective</p>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-800">
+                    Use sentence frames to retell events, describe feelings, and cite one piece of evidence.
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Key vocabulary</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {["chapter", "clue", "evidence", "problem", "solution"].map((word) => (
+                    <span
+                      key={word}
+                      className="rounded-xl border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
+                    >
+                      {word}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl bg-[#1E3167] p-4 text-white">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/65">Sentence frames</p>
+                <div className="mt-3 space-y-2.5">
+                  {[
+                    "In Chapter 12, ____ happened.",
+                    "I think ____ because ____.",
+                    "The evidence is ____.",
+                  ].map((frame, index) => (
+                    <div key={frame} className="flex items-center gap-3">
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/14 text-[11px] font-bold text-white/90">
+                        {index + 1}
+                      </span>
+                      <span className="text-sm font-medium text-white/95">{frame}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Lesson flow</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-900">Warm-Up</p>
+                  </div>
+                  <div className="rounded-full bg-slate-900 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+                    3 steps
+                  </div>
+                </div>
+                <p className="mt-2 text-xs leading-relaxed text-slate-700">
+                  Picture walk, stop-and-jot, and a quick partner share with built-in scaffolds.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       );
     case "li-li-chinese":
@@ -101,6 +172,8 @@ const cardVariants = {
 export default function FeaturedTools() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const featuredTool = featuredTools.find((tool) => tool.id === "scaffold") ?? featuredTools[0];
+  const compactTools = featuredTools.filter((tool) => tool.id !== featuredTool.id);
 
   return (
     <section
@@ -129,83 +202,116 @@ export default function FeaturedTools() {
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               data-testid="tools-headline"
             >
-              Built for real classrooms.<br />
-              Backed by research.
+              Tools in the lab.
             </h2>
+            <p className="mt-4 max-w-xl text-sm text-muted-foreground leading-relaxed">
+              One featured product up front, with the rest of the lab close by.
+            </p>
           </motion.div>
-          <motion.a
-            href="#tools"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group whitespace-nowrap"
-            data-testid="tools-view-all"
-          >
-            View all tools
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="group-hover:translate-x-0.5 transition-transform"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </motion.a>
         </div>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-5"
+          className="grid lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.8fr)] gap-5 items-start"
           data-testid="tools-grid"
         >
-          {featuredTools.map((tool) => (
-            <motion.div
-              key={tool.id}
-              variants={cardVariants}
-              className="group relative rounded-2xl border border-border/60 bg-card overflow-hidden hover:border-border transition-all duration-300 hover:shadow-xl flex flex-col"
-              style={{ boxShadow: "0 0 0 0px transparent" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 32px -8px ${tool.accent}22`; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 0 0px transparent"; }}
-              data-testid={`tool-card-${tool.id}`}
-            >
-              <div className="h-36 bg-gradient-to-br from-card to-background/60 border-b border-border/40 overflow-hidden">
-                {getToolPreview(tool.id, tool.screenshotSrc, tool.screenshotAlt)}
-              </div>
+          <motion.div
+            variants={cardVariants}
+            className="group relative rounded-2xl border border-border/60 bg-card overflow-hidden hover:border-border transition-all duration-300 hover:shadow-xl flex flex-col"
+            style={{ boxShadow: "0 0 0 0px transparent" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 32px -8px ${featuredTool.accent}22`; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 0 0px transparent"; }}
+            data-testid={`tool-card-${featuredTool.id}`}
+          >
+            <div className="h-[360px] bg-gradient-to-br from-card to-background/60 border-b border-border/40 overflow-hidden">
+              {getToolPreview(featuredTool.id, featuredTool.screenshotSrc, featuredTool.screenshotAlt)}
+            </div>
 
-              <div className="p-5 flex flex-col flex-1">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${tool.accent}15`, border: `1px solid ${tool.accent}30` }}>
-                    {getToolIcon(tool.id)}
-                  </div>
-                  <h3 className="font-semibold text-sm text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                    {tool.title}
+            <div className="p-6 flex flex-col flex-1">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: `${featuredTool.accent}15`, border: `1px solid ${featuredTool.accent}30` }}>
+                  {getToolIcon(featuredTool.id)}
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold tracking-[0.18em] uppercase text-primary">Featured</p>
+                  <h3 className="font-semibold text-2xl text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    {featuredTool.title}
                   </h3>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1">
-                  {tool.subtitle}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-wrap gap-1.5">
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5 max-w-2xl">
+                {featuredTool.subtitle}
+              </p>
+              <div className="flex flex-wrap items-center gap-2 justify-between">
+                <div className="flex flex-wrap gap-2">
+                  {featuredTool.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2.5 py-1 rounded-full text-xs font-medium border"
+                      style={{ color: featuredTool.accent, borderColor: `${featuredTool.accent}30`, background: `${featuredTool.accent}10` }}
+                      data-testid={`tool-tag-${tag.toLowerCase()}`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={featuredTool.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-medium text-foreground hover:border-primary/50 hover:bg-primary/10 transition-colors"
+                  data-testid={`tool-link-${featuredTool.id}`}
+                >
+                  Open tool
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 3 9.5 6 6.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div variants={cardVariants} className="space-y-3">
+            {compactTools.map((tool) => (
+              <a
+                key={tool.id}
+                href={tool.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-4 rounded-2xl border border-border/60 bg-card/70 p-4 hover:border-border hover:bg-card transition-all duration-300"
+                data-testid={`tool-compact-${tool.id}`}
+              >
+                <div
+                  className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+                  style={{ background: `${tool.accent}15`, border: `1px solid ${tool.accent}30` }}
+                >
+                  {getToolIcon(tool.id)}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="text-base font-semibold text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                      {tool.title}
+                    </h3>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0 text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 transition-all"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </div>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    {tool.subtitle}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
                     {tool.tags.map((tag) => (
                       <span
                         key={tag}
                         className="px-2 py-0.5 rounded-full text-xs font-medium border"
                         style={{ color: tool.accent, borderColor: `${tool.accent}30`, background: `${tool.accent}10` }}
-                        data-testid={`tool-tag-${tag.toLowerCase()}`}
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <a
-                    href={tool.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-7 h-7 rounded-full flex items-center justify-center border border-border/60 hover:border-primary/50 hover:bg-primary/10 transition-colors"
-                    data-testid={`tool-link-${tool.id}`}
-                    aria-label={`View ${tool.title}`}
-                  >
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 3 9.5 6 6.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  </a>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </a>
+            ))}
+          </motion.div>
         </motion.div>
       </div>
     </section>

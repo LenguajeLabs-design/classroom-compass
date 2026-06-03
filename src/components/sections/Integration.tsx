@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { siteResources } from "@/content/site";
 
 const integrations = [
   {
@@ -8,6 +9,7 @@ const integrations = [
     description: "Language proficiency standards and assessment frameworks for K-12 multilingual learners.",
     category: "Standards",
     accent: "#3B82F6",
+    href: "https://wida.wisc.edu/teach/standards/eld",
   },
   {
     id: "actfl",
@@ -15,6 +17,7 @@ const integrations = [
     description: "American Council on the Teaching of Foreign Languages proficiency guidelines and frameworks.",
     category: "Frameworks",
     accent: "#8B5CF6",
+    href: "https://www.actfl.org/proficiency-guidelines-overview",
   },
   {
     id: "tesol",
@@ -22,6 +25,7 @@ const integrations = [
     description: "Teaching English to Speakers of Other Languages standards, research, and professional learning.",
     category: "Research",
     accent: "#10B981",
+    href: "https://www.tesol.org/professional-development/publications-and-research/research-and-standards/standards/",
   },
   {
     id: "google-workspace",
@@ -29,6 +33,7 @@ const integrations = [
     description: "Seamless integration with Google Docs, Slides, and Classroom for lesson planning workflows.",
     category: "Productivity",
     accent: "#F59E0B",
+    href: "https://edu.google.com/intl/ALL_us/workspace-for-education/editions/overview/",
   },
   {
     id: "openai",
@@ -36,6 +41,7 @@ const integrations = [
     description: "Powered by state-of-the-art language models for intelligent differentiation and scaffolding.",
     category: "AI",
     accent: "#EC4899",
+    href: "https://openai.com/academy/chatgpt-for-education/",
   },
   {
     id: "mlrc",
@@ -43,6 +49,7 @@ const integrations = [
     description: "Multilingual Research Collaborative partnerships advancing evidence-based classroom tools.",
     category: "Research",
     accent: "#14B8A6",
+    href: siteResources.mlrcCapstonePdf,
   },
 ];
 
@@ -110,9 +117,12 @@ export default function Integration() {
           data-testid="integration-grid"
         >
           {integrations.map((item) => (
-            <motion.div
+            <motion.a
               key={item.id}
               variants={itemVariants}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group rounded-2xl border border-border/60 bg-card/40 p-5 hover:border-primary/30 hover:bg-card/70 transition-all duration-300"
               data-testid={`integration-card-${item.id}`}
             >
@@ -136,7 +146,7 @@ export default function Integration() {
               <p className="text-xs text-muted-foreground leading-relaxed">
                 {item.description}
               </p>
-            </motion.div>
+            </motion.a>
           ))}
         </motion.div>
       </div>
