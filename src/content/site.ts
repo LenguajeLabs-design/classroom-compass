@@ -6,6 +6,7 @@ export type SiteNavLink = {
 export type ToolId =
   | "wida-family-guide"
   | "scaffold"
+  | "compass"
   | "li-li-chinese"
   | "hangul-flow";
 
@@ -87,6 +88,16 @@ export const featuredTools: FeaturedTool[] = [
     url: "https://scaffold.replit.app/",
     screenshotSrc: `${basePath}app-screenshots/scaffold-lesson-output.png`,
     screenshotAlt: "Scaffold lesson output screenshot",
+  },
+  {
+    id: "compass",
+    title: "Compass",
+    subtitle: "A growing support space for students who are neurodiverse or under the care of student services, helping make language, literacy, and next steps clearer and more manageable.",
+    tags: ["Student Support", "Neurodiversity"],
+    accent: "#F59E0B",
+    url: "https://compass-lenguajelab.replit.app/",
+    screenshotSrc: "",
+    screenshotAlt: "Compass preview",
   },
   {
     id: "li-li-chinese",

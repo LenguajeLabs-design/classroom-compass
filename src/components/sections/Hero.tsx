@@ -31,7 +31,7 @@ const showcaseItems = [
     title: "Scaffold",
     subtitle: "AI-supported EAL lesson planning with school access.",
     url: "https://scaffold.replit.app/",
-    image: `${import.meta.env.BASE_URL}app-screenshots/scaffold.png`,
+    image: `${import.meta.env.BASE_URL}app-screenshots/scaffold-lesson-output.png`,
     accent: "#1E3A8A",
   },
   {

@@ -22,6 +22,14 @@ function getToolIcon(toolId: ToolId): ReactNode {
           <rect x="10" y="14.5" width="5" height="2" rx="1" fill="#3B82F6" opacity="0.3"/>
         </svg>
       );
+    case "compass":
+      return (
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <circle cx="11" cy="11" r="7.5" stroke="#F59E0B" strokeWidth="1.4"/>
+          <path d="M13.8 8.2 12 13.6 6.6 15.4 8.4 10z" fill="#F59E0B" opacity="0.8"/>
+          <circle cx="11" cy="11" r="1.2" fill="#F59E0B"/>
+        </svg>
+      );
     case "li-li-chinese":
       return (
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -129,6 +137,59 @@ function getToolPreview(toolId: ToolId, screenshotSrc: string, screenshotAlt: st
                 <p className="mt-2 text-xs leading-relaxed text-slate-700">
                   Picture walk, stop-and-jot, and a quick partner share with built-in scaffolds.
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    case "compass":
+      return (
+        <div className="h-full w-full bg-[radial-gradient(circle_at_top,_rgba(245,158,11,0.22),_transparent_44%),linear-gradient(180deg,#fff7e6_0%,#fffdf8_100%)] p-5 text-slate-900">
+          <div className="h-full rounded-[1.75rem] border border-amber-200/70 bg-white/92 p-5 shadow-[0_24px_80px_-36px_rgba(146,64,14,0.38)]">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-700">Compass</p>
+                <h4 className="mt-2 text-xl font-bold text-slate-900" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  Support with more clarity and calm
+                </h4>
+              </div>
+              <div className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-amber-800">
+                Growing now
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-3 md:grid-cols-[1.1fr_0.9fr]">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Designed to help with</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {["Student services", "Neurodiversity", "Next steps"].map((pill) => (
+                    <span
+                      key={pill}
+                      className="rounded-full border border-amber-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-700"
+                    >
+                      {pill}
+                    </span>
+                  ))}
+                </div>
+                <p className="mt-4 text-sm leading-relaxed text-slate-700">
+                  A practical space for supporting neurodiverse learners and students receiving student services with clearer language, literacy support, and next steps.
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-slate-900 p-4 text-white">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/60">Why it matters</p>
+                <div className="mt-3 space-y-3">
+                  {[
+                    "Makes complex support feel more navigable",
+                    "Connects language, literacy, and student care",
+                    "Creates a calmer starting point for families and staff",
+                  ].map((line) => (
+                    <div key={line} className="flex items-start gap-2.5">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-amber-300" />
+                      <span className="text-sm leading-relaxed text-white/92">{line}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
