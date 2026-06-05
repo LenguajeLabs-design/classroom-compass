@@ -36,7 +36,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          BASE_PATH: /lenguaje-labs-site/
+          BASE_PATH: /classroom-compass/
 
       - name: Configure Pages
         uses: actions/configure-pages@v6

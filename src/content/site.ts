@@ -51,7 +51,7 @@ const basePath = import.meta.env.BASE_URL;
 export const siteContact = {
   email: "mailto:lenguajelabs@proton.me",
   linkedin: "https://www.linkedin.com/in/federico-orozco-687b5431/",
-  github: "https://github.com/LenguajeLabs-design/lenguaje-labs-site",
+  github: "https://github.com/LenguajeLabs-design/classroom-compass",
 };
 
 export const siteResources = {
