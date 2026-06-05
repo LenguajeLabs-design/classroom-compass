@@ -86,24 +86,24 @@ export default function Mission() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="text-xs font-bold tracking-widest text-primary uppercase mb-4" data-testid="mission-label">
-              OUR MISSION
+              WHY COMPASS
             </p>
             <h2
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground mb-6"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               data-testid="mission-headline"
             >
-              Language is human potential.
+              Support should feel understandable.
             </h2>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 max-w-md" data-testid="mission-body">
-              When we remove barriers to understanding, we unlock opportunity, identity, and belonging. AI should amplify teachers, empower learners, and strengthen the bridge between home and school.
+              Classroom Compass is built around a simple idea: when language gets clearer, support gets more humane. Families, teachers, and care teams need tools that reduce friction instead of adding more jargon.
             </p>
             <a
               href="#mission"
               className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors group"
               data-testid="mission-philosophy-link"
             >
-              Our Philosophy
+              Our Approach
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="group-hover:translate-x-0.5 transition-transform"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </a>
           </motion.div>

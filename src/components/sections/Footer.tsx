@@ -1,16 +1,17 @@
 import { footerColumns, footerSocialLinks, siteContact, siteResources } from "@/content/site";
 
 function LLLogo() {
-  const logoSrc = `${import.meta.env.BASE_URL}assets/lenguaje-labs-logo.jpg`;
-
   return (
-    <img
-      src={logoSrc}
-      alt="Lenguaje Labs logo"
-      className="h-7 w-7 rounded-md object-cover"
-      width="28"
-      height="28"
-    />
+    <div
+      className="grid h-7 w-7 place-items-center rounded-md border border-amber-300/40 bg-[radial-gradient(circle_at_30%_30%,rgba(251,191,36,0.4),transparent_55%),linear-gradient(180deg,rgba(15,23,42,0.95),rgba(30,41,59,0.95))]"
+      aria-hidden="true"
+    >
+      <svg width="15" height="15" viewBox="0 0 22 22" fill="none">
+        <circle cx="11" cy="11" r="7.5" stroke="#FBBF24" strokeWidth="1.5" />
+        <path d="M13.8 8.2 12 13.6 6.6 15.4 8.4 10z" fill="#FBBF24" />
+        <circle cx="11" cy="11" r="1.15" fill="#FDE68A" />
+      </svg>
+    </div>
   );
 }
 
@@ -23,11 +24,11 @@ export default function Footer() {
             <div className="flex items-center gap-2.5 mb-4" data-testid="footer-logo">
               <LLLogo />
               <span className="text-sm font-semibold tracking-widest text-foreground/90" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                LENGUAJE LABS
+                CLASSROOM COMPASS
               </span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-5 max-w-xs" data-testid="footer-tagline">
-              AI-powered tools and research for multilingual learning communities.
+              A clearer, calmer landing place for student support, language clarity, and family communication.
             </p>
             <div className="flex items-center gap-3">
               {footerSocialLinks.map((link) => (
@@ -88,7 +89,7 @@ export default function Footer() {
           <div>
             <p className="text-xs font-bold tracking-widest text-muted-foreground/60 uppercase mb-4">STAY IN THE LOOP</p>
             <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-              Follow the work, browse the source, or reach out directly.
+              Follow the project, browse the source, or reach out directly.
             </p>
             <div className="flex flex-col gap-2" data-testid="footer-cta-links">
               <a
@@ -96,7 +97,7 @@ export default function Footer() {
                 className="inline-flex items-center justify-between rounded-full border border-border/60 px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
                 data-testid="footer-cta-email"
               >
-                Email Lenguaje Labs
+                Email Classroom Compass
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </a>
               <a
@@ -115,13 +116,13 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-border/40 flex flex-col items-center gap-2 text-center">
           <p className="text-xs text-muted-foreground/70">
-            Created by <span className="text-foreground/80 font-medium">Federico Orozco</span> | Lenguaje Labs
+            Created by <span className="text-foreground/80 font-medium">Federico Orozco</span> | Classroom Compass
           </p>
           <a href={siteContact.email} className="text-xs text-muted-foreground/60 hover:text-foreground transition-colors">
-            Lenguajelabs@proton.me
+            lenguajelabs@proton.me
           </a>
           <p className="text-xs text-muted-foreground/50">
-            Based on the WIDA ELD Standards Framework
+            Built for clearer student-support communication
           </p>
           <p className="text-xs text-muted-foreground/40 mt-1" data-testid="footer-copyright">
             © 2026 Federico Orozco. All rights reserved.

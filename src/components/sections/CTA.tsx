@@ -46,7 +46,7 @@ export default function CTA() {
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               data-testid="cta-headline"
             >
-              Let's build a more understandable future together.
+              Build a calmer support experience.
             </h2>
           </motion.div>
 
@@ -57,7 +57,7 @@ export default function CTA() {
             className="flex flex-col gap-6"
           >
             <p className="text-lg text-muted-foreground leading-relaxed" data-testid="cta-body">
-              Collaborate, inquire, or bring Lenguaje Labs into your school or organization. We partner with educators, researchers, and institutions ready to invest in multilingual futures.
+              Reach out if you want to pilot Classroom Compass, shape the product direction, or explore how clearer student-support communication could look in your context.
             </p>
             <div className="flex flex-wrap gap-3">
               <a

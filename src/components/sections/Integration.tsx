@@ -104,7 +104,7 @@ export default function Integration() {
               Connected to practice.
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed mt-4 max-w-lg" data-testid="integration-body">
-              Lenguaje Labs tools integrate with the frameworks, standards, and platforms educators already use — so adoption is seamless and impact is immediate.
+              Classroom Compass is being shaped to fit the frameworks, standards, and school tools educators already rely on, so adoption can feel practical from day one.
             </p>
           </motion.div>
         </div>

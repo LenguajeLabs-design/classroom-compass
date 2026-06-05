@@ -3,16 +3,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { navLinks } from "@/content/site";
 
 function LLLogo() {
-  const logoSrc = `${import.meta.env.BASE_URL}assets/lenguaje-labs-logo.jpg`;
-
   return (
-    <img
-      src={logoSrc}
-      alt="Lenguaje Labs logo"
-      className="h-8 w-8 rounded-lg object-cover"
-      width="32"
-      height="32"
-    />
+    <div
+      className="grid h-8 w-8 place-items-center rounded-lg border border-amber-300/40 bg-[radial-gradient(circle_at_30%_30%,rgba(251,191,36,0.4),transparent_55%),linear-gradient(180deg,rgba(15,23,42,0.95),rgba(30,41,59,0.95))]"
+      aria-hidden="true"
+    >
+      <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
+        <circle cx="11" cy="11" r="7.5" stroke="#FBBF24" strokeWidth="1.5" />
+        <path d="M13.8 8.2 12 13.6 6.6 15.4 8.4 10z" fill="#FBBF24" />
+        <circle cx="11" cy="11" r="1.15" fill="#FDE68A" />
+      </svg>
+    </div>
   );
 }
 
@@ -48,11 +49,11 @@ export default function Nav() {
           data-testid="nav-logo"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
         >
-          <LLLogo />
-          <span className="text-sm font-semibold tracking-widest text-foreground/90 group-hover:text-foreground transition-colors" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            LENGUAJE LABS
-          </span>
-        </a>
+            <LLLogo />
+            <span className="text-sm font-semibold tracking-widest text-foreground/90 group-hover:text-foreground transition-colors" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            CLASSROOM COMPASS
+            </span>
+          </a>
 
         <nav className="hidden md:flex items-center gap-7" data-testid="nav-links">
           {navLinks.map((link) => (
@@ -75,7 +76,7 @@ export default function Nav() {
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
             data-testid="nav-cta"
           >
-            Explore the Lab
+            See Features
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </a>
         </div>
@@ -118,7 +119,7 @@ export default function Nav() {
                 onClick={(e) => { e.preventDefault(); handleNavClick("#lab"); setMenuOpen(false); }}
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium w-fit"
               >
-                Explore the Lab <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                See Features <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </a>
             </div>
           </motion.div>

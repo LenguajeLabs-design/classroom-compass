@@ -14,6 +14,13 @@ const fadeUp = {
 
 const showcaseItems = [
   {
+    title: "Classroom Compass",
+    subtitle: "A calmer starting point for student support, family communication, and next-step planning.",
+    url: "https://github.com/LenguajeLabs-design/classroom-compass",
+    image: `${import.meta.env.BASE_URL}app-screenshots/scaffold-lesson-output.png`,
+    accent: "#F59E0B",
+  },
+  {
     title: "EALDesk Elementary",
     subtitle: "Planning tools for multilingual elementary classrooms.",
     url: "https://lenguajelabs-design.github.io/EALDesk-Elementary/",
@@ -215,7 +222,7 @@ export default function Hero() {
               data-testid="hero-badge"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-xs font-medium text-primary tracking-wide">AI · LANGUAGE · EDUCATION</span>
+              <span className="text-xs font-medium text-primary tracking-wide">STUDENT SUPPORT · LANGUAGE · CLARITY</span>
             </motion.div>
 
             <motion.h1
@@ -227,11 +234,11 @@ export default function Hero() {
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               data-testid="hero-headline"
             >
-              AI-powered tools for{" "}
+              Support tools for{" "}
               <span className="relative">
-                <span className="text-primary">multilingual</span>
+                <span className="text-primary">clearer</span>
               </span>{" "}
-              futures.
+              next steps.
             </motion.h1>
 
             <motion.p
@@ -242,7 +249,7 @@ export default function Hero() {
               className="mb-7 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg"
               data-testid="hero-subheadline"
             >
-              We build practical tools and systems that empower educators, support multilingual learners, and connect families to clarity.
+              Classroom Compass helps schools support neurodiverse learners and student services conversations with calmer language, clearer pathways, and more understandable communication for families.
             </motion.p>
 
             <motion.div
@@ -259,7 +266,7 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25 active:scale-95"
                 data-testid="hero-cta-explore"
               >
-                Explore the Lab
+                View Features
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </a>
               <a
@@ -268,7 +275,7 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border/60 text-foreground/80 font-semibold text-sm hover:border-primary/50 hover:text-foreground transition-all"
                 data-testid="hero-cta-research"
               >
-                View Research
+                Why It Matters
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </a>
             </motion.div>
@@ -285,9 +292,9 @@ export default function Hero() {
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" fill="hsl(217 91% 60% / 0.6)"/><path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="hsl(217 91% 60% / 0.6)" strokeWidth="1.5" strokeLinecap="round"/></svg>
               </div>
               <div>
-                <p className="text-xs font-semibold tracking-widest text-primary/80 uppercase mb-0.5">Founded by</p>
+                <p className="text-xs font-semibold tracking-widest text-primary/80 uppercase mb-0.5">Created by</p>
                 <p className="text-sm font-semibold text-foreground">Federico Orozco</p>
-                <p className="text-xs text-muted-foreground">Multilingual AI Integration Specialist</p>
+                <p className="text-xs text-muted-foreground">Educator building clearer support tools</p>
               </div>
             </motion.div>
           </div>

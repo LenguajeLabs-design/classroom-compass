@@ -60,11 +60,11 @@ export const siteResources = {
 };
 
 export const navLinks: SiteNavLink[] = [
-  { label: "The Lab", href: "#lab" },
+  { label: "Overview", href: "#lab" },
+  { label: "Approach", href: "#mission" },
+  { label: "Features", href: "#tools" },
   { label: "Research", href: "#research" },
-  { label: "Frameworks", href: "#tools" },
-  { label: "Integration", href: "#integration" },
-  { label: "About", href: "#mission" },
+  { label: "Fit", href: "#integration" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -91,13 +91,13 @@ export const featuredTools: FeaturedTool[] = [
   },
   {
     id: "compass",
-    title: "Compass",
-    subtitle: "A growing support space for students who are neurodiverse or under the care of student services, helping make language, literacy, and next steps clearer and more manageable.",
-    tags: ["Student Support", "Neurodiversity"],
+    title: "Classroom Compass",
+    subtitle: "A calm support hub for neurodiverse learners and student services teams, designed to make language, literacy, and next steps easier to understand.",
+    tags: ["Student Support", "Care Teams", "Neurodiversity"],
     accent: "#F59E0B",
-    url: "https://compass-lenguajelab.replit.app/",
+    url: "https://github.com/LenguajeLabs-design/classroom-compass",
     screenshotSrc: "",
-    screenshotAlt: "Compass preview",
+    screenshotAlt: "Classroom Compass preview",
   },
   {
     id: "li-li-chinese",
@@ -123,25 +123,25 @@ export const featuredTools: FeaturedTool[] = [
 
 export const researchMilestones: ResearchMilestone[] = [
   {
-    id: "action",
-    title: "Action Research",
-    body: "Ongoing research in multilingual classrooms across Asia.",
-    date: "Ongoing",
+    id: "design",
+    title: "Problem Discovery",
+    body: "Collecting patterns from student support, multilingual learning, and family communication needs.",
+    date: "Now",
     status: "ongoing",
   },
   {
     id: "mlrc",
-    title: "MLRC Capstone Research",
-    body: "Investigating family-facing tools that support language development.",
+    title: "Capstone Direction",
+    body: "Exploring how family-facing and school-facing tools can reduce confusion around support plans and next steps.",
     date: "Summer 2026",
     status: "ongoing",
     href: siteResources.mlrcCapstonePdf,
-    linkLabel: "Open capstone PDF",
+    linkLabel: "Open research PDF",
   },
   {
-    id: "workshops",
-    title: "Workshops & PD",
-    body: "Hands-on professional learning for schools and districts.",
+    id: "pilot",
+    title: "Pilot Readiness",
+    body: "Shaping the product into something schools can test with real teams, real workflows, and real families.",
     date: "Ongoing",
     status: "ongoing",
   },
@@ -151,11 +151,11 @@ export const footerColumns: FooterColumn[] = [
   {
     heading: "EXPLORE",
     links: [
-      { label: "The Lab", href: "#lab" },
+      { label: "Overview", href: "#lab" },
+      { label: "Approach", href: "#mission" },
+      { label: "Features", href: "#tools" },
       { label: "Research", href: "#research" },
-      { label: "Frameworks", href: "#tools" },
-      { label: "Integration", href: "#integration" },
-      { label: "Resources", href: "#research" },
+      { label: "Fit", href: "#integration" },
     ],
   },
   {
@@ -170,8 +170,8 @@ export const footerColumns: FooterColumn[] = [
     heading: "RESOURCES",
     links: [
       { label: "About", href: "#mission" },
-      { label: "Mission", href: "#mission" },
-      { label: "How I Build Tools", href: siteResources.presentationPdf, external: true },
+      { label: "Research PDF", href: siteResources.mlrcCapstonePdf, external: true },
+      { label: "Project Notes", href: siteResources.presentationPdf, external: true },
       { label: "GitHub Repo", href: siteContact.github, external: true },
     ],
   },

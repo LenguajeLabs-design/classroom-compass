@@ -233,7 +233,7 @@ const cardVariants = {
 export default function FeaturedTools() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const featuredTool = featuredTools.find((tool) => tool.id === "scaffold") ?? featuredTools[0];
+  const featuredTool = featuredTools.find((tool) => tool.id === "compass") ?? featuredTools[0];
   const compactTools = featuredTools.filter((tool) => tool.id !== featuredTool.id);
 
   return (
@@ -256,17 +256,17 @@ export default function FeaturedTools() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="text-xs font-bold tracking-widest text-primary uppercase mb-4" data-testid="tools-label">
-              FEATURED TOOLS
+              FEATURED
             </p>
             <h2
               className="text-4xl md:text-5xl font-bold leading-tight text-foreground"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               data-testid="tools-headline"
             >
-              Tools in the lab.
+              What Classroom Compass is growing into.
             </h2>
             <p className="mt-4 max-w-xl text-sm text-muted-foreground leading-relaxed">
-              One featured product up front, with the rest of the lab close by.
+              The main experience is Classroom Compass, with related tools nearby that inform the broader support ecosystem.
             </p>
           </motion.div>
         </div>
