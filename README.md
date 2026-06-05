@@ -1,6 +1,6 @@
-# Lenguaje Labs Site
+# classroom-compass
 
-Vite + React + TypeScript marketing site for Lenguaje Labs.
+Vite + React + TypeScript site for the Classroom Compass project.
 
 ## Commands
 
@@ -11,7 +11,6 @@ npm run typecheck
 npm run build
 ```
 
-The GitHub Pages workflow builds with `BASE_PATH=/lenguaje-labs-site/` and publishes `dist/public`.
-# classroom-compass
-# classroom-compass
-# classroom-compass
+## Deploy
+
+The GitHub Pages workflow builds with `BASE_PATH=/classroom-compass/` and publishes `dist/public`.
