@@ -13,3 +13,4 @@ npm run build
 
 The GitHub Pages workflow builds with `BASE_PATH=/lenguaje-labs-site/` and publishes `dist/public`.
 # classroom-compass
+# classroom-compass
