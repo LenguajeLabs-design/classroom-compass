@@ -1,12 +1,545 @@
-import { useEffect } from "react";
-import Home from "@/pages/Home";
+import { startTransition, useEffect, useState } from "react";
+import { concerns, supportAreas, supportLevelCopy, type Strategy } from "@/content/compass";
+
+function CompassMark() {
+  return (
+    <div className="grid h-11 w-11 place-items-center rounded-2xl border border-sky-200 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.25),transparent_55%),linear-gradient(180deg,#ffffff,#eff6ff)] shadow-sm">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <circle cx="11" cy="11" r="7.5" stroke="#2563EB" strokeWidth="1.5" />
+        <path d="M13.8 8.2 12 13.6 6.6 15.4 8.4 10z" fill="#2563EB" />
+        <circle cx="11" cy="11" r="1.2" fill="#93C5FD" />
+      </svg>
+    </div>
+  );
+}
+
+function StrategyCard({
+  strategy,
+  selected,
+  onToggle,
+}: {
+  strategy: Strategy;
+  selected: boolean;
+  onToggle: () => void;
+}) {
+  const isUniversal = strategy.level === "Universal";
+
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className={`w-full rounded-3xl border p-5 text-left transition-all ${
+        selected
+          ? isUniversal
+            ? "border-sky-400 bg-sky-50 shadow-md"
+            : "border-emerald-400 bg-emerald-50 shadow-md"
+          : "border-slate-200 bg-white hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"
+      }`}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <div
+            className={`mb-3 inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${
+              isUniversal
+                ? "bg-sky-100 text-sky-700"
+                : "bg-emerald-100 text-emerald-700"
+            }`}
+          >
+            {strategy.level}
+          </div>
+          <h4 className="text-lg font-semibold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            {strategy.title}
+          </h4>
+        </div>
+        <div
+          className={`mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border text-sm font-semibold ${
+            selected
+              ? isUniversal
+                ? "border-sky-300 bg-sky-100 text-sky-700"
+                : "border-emerald-300 bg-emerald-100 text-emerald-700"
+              : "border-slate-200 bg-slate-50 text-slate-400"
+          }`}
+        >
+          {selected ? "✓" : "+"}
+        </div>
+      </div>
+      <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-600">
+        <p>
+          <span className="font-semibold text-slate-900">What it helps with: </span>
+          {strategy.helpsWith}
+        </p>
+        <p>
+          <span className="font-semibold text-slate-900">What it looks like in class: </span>
+          {strategy.classroomLook}
+        </p>
+        <p>
+          <span className="font-semibold text-slate-900">When to try it: </span>
+          {strategy.whenToTry}
+        </p>
+      </div>
+    </button>
+  );
+}
 
 function App() {
+  const [selectedConcernId, setSelectedConcernId] = useState(concerns[0].id);
+  const [selectedAreaId, setSelectedAreaId] = useState("attention-focus");
+  const [selectedUniversal, setSelectedUniversal] = useState<string[]>([]);
+  const [selectedIntervention, setSelectedIntervention] = useState<string[]>([]);
+
   useEffect(() => {
-    document.documentElement.classList.add("dark");
+    document.documentElement.classList.remove("dark");
   }, []);
 
-  return <Home />;
+  const selectedConcern = concerns.find((concern) => concern.id === selectedConcernId) ?? concerns[0];
+  const likelyAreas = supportAreas.filter((area) => selectedConcern.supportAreaIds.includes(area.id));
+  const selectedArea =
+    supportAreas.find((area) => area.id === selectedAreaId) ??
+    likelyAreas[0] ??
+    supportAreas[0];
+
+  useEffect(() => {
+    if (!selectedConcern.supportAreaIds.includes(selectedArea.id)) {
+      setSelectedAreaId(selectedConcern.supportAreaIds[0] ?? supportAreas[0].id);
+    }
+  }, [selectedConcern, selectedArea]);
+
+  const toggleStrategy = (title: string, type: "universal" | "intervention") => {
+    const update = type === "universal" ? setSelectedUniversal : setSelectedIntervention;
+    const limit = type === "universal" ? 3 : 2;
+
+    update((current) => {
+      if (current.includes(title)) {
+        return current.filter((item) => item !== title);
+      }
+
+      if (current.length >= limit) {
+        return [...current.slice(1), title];
+      }
+
+      return [...current, title];
+    });
+  };
+
+  const chooseConcern = (concernId: string) => {
+    const concern = concerns.find((item) => item.id === concernId);
+    if (!concern) return;
+
+    startTransition(() => {
+      setSelectedConcernId(concern.id);
+      setSelectedAreaId(concern.supportAreaIds[0] ?? supportAreas[0].id);
+      setSelectedUniversal([]);
+      setSelectedIntervention([]);
+    });
+  };
+
+  const selectedUniversalStrategies = selectedArea.universal.filter((strategy) =>
+    selectedUniversal.includes(strategy.title),
+  );
+  const selectedInterventionStrategies = selectedArea.intervention.filter((strategy) =>
+    selectedIntervention.includes(strategy.title),
+  );
+
+  return (
+    <div className="min-h-screen bg-[linear-gradient(180deg,#f8fbff_0%,#f3f7fb_42%,#eef4f8_100%)] text-slate-900">
+      <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
+          <a href="#top" className="flex items-center gap-3">
+            <CompassMark />
+            <div>
+              <p className="text-lg font-semibold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                Classroom Compass
+              </p>
+              <p className="text-sm text-slate-500">Practical supports for teacher meetings</p>
+            </div>
+          </a>
+          <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
+            <a href="#concerns" className="hover:text-slate-950">Concerns</a>
+            <a href="#meeting-mode" className="hover:text-slate-950">Meeting Mode</a>
+            <a href="#areas" className="hover:text-slate-950">Support Areas</a>
+            <a href="#plan" className="hover:text-slate-950">Action Plan</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="top">
+        <section className="relative overflow-hidden px-6 pb-20 pt-16">
+          <div className="absolute inset-x-0 top-0 -z-10 h-[26rem] bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.18),transparent_35%),radial-gradient(circle_at_top_left,rgba(16,185,129,0.12),transparent_30%)]" />
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div className="max-w-3xl">
+              <div className="mb-5 inline-flex rounded-full border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
+                Problem to plan
+              </div>
+              <h1 className="max-w-4xl text-5xl font-bold leading-[1.02] tracking-tight text-slate-950 md:text-6xl" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                When behavior is the signal, Classroom Compass helps teachers find the next move.
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
+                Start with the classroom concern, identify the likely need underneath it, and choose
+                universal or intervention supports that make the next teacher meeting more useful.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="#concerns"
+                  className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+                >
+                  Start with a classroom concern
+                </a>
+                <a
+                  href="#areas"
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
+                >
+                  Browse support areas
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_-36px_rgba(15,23,42,0.25)]">
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Meeting mode</p>
+                  <h2 className="mt-2 text-2xl font-semibold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    Leave the meeting with a plan, not just ideas.
+                  </h2>
+                </div>
+                <div className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                  Universal + Intervention
+                </div>
+              </div>
+              <div className="mt-6 grid gap-3">
+                {[
+                  "Name the concern",
+                  "Choose the likely need",
+                  "Pick 2 to 3 universal strategies",
+                  "Add 1 intervention option if needed",
+                  "Decide what to watch for this week",
+                ].map((step, index) => (
+                  <div key={step} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-sm font-semibold text-slate-700">
+                      {index + 1}
+                    </div>
+                    <p className="pt-1 text-sm text-slate-700">{step}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="concerns" className="mx-auto max-w-7xl px-6 py-10">
+          <div className="mb-8 max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Start with what you see</p>
+            <h2 className="mt-3 text-4xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              Teachers usually notice the problem before they know the reason.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-600">
+              Choose the classroom challenge that sounds most like your student. Then use Classroom
+              Compass to slow the decision-making down and choose supports that are more likely to help.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {concerns.map((concern) => {
+              const selected = concern.id === selectedConcern.id;
+              return (
+                <button
+                  key={concern.id}
+                  type="button"
+                  onClick={() => chooseConcern(concern.id)}
+                  className={`rounded-[1.75rem] border p-5 text-left transition-all ${
+                    selected
+                      ? "border-sky-400 bg-sky-50 shadow-md"
+                      : "border-slate-200 bg-white hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"
+                  }`}
+                >
+                  <h3 className="text-xl font-semibold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    {concern.label}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{concern.summary}</p>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
+        <section id="meeting-mode" className="mx-auto max-w-7xl px-6 py-12">
+          <div className="grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
+            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Likely support areas</p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                What might be underneath this?
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                This tool does not diagnose a student. It helps teachers choose better next steps.
+              </p>
+
+              <div className="mt-6 grid gap-3">
+                {likelyAreas.map((area) => {
+                  const selected = area.id === selectedArea.id;
+                  return (
+                    <button
+                      key={area.id}
+                      type="button"
+                      onClick={() => setSelectedAreaId(area.id)}
+                      className={`rounded-2xl border px-4 py-4 text-left transition ${
+                        selected
+                          ? "border-slate-900 bg-slate-950 text-white shadow-md"
+                          : "border-slate-200 bg-slate-50 hover:border-slate-300 hover:bg-white"
+                      }`}
+                    >
+                      <p className={`text-lg font-semibold ${selected ? "text-white" : "text-slate-950"}`} style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                        {area.name}
+                      </p>
+                      <p className={`mt-2 text-sm leading-relaxed ${selected ? "text-slate-200" : "text-slate-600"}`}>
+                        {area.tagline}
+                      </p>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="mt-8 rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Teacher lens</p>
+                <p className="mt-3 text-base leading-relaxed text-slate-700">"{selectedArea.teacherQuestion}"</p>
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Selected area</p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                {selectedArea.name}
+              </h2>
+              <p className="mt-3 text-base leading-relaxed text-slate-600">{selectedArea.intro}</p>
+
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">You might be here if</p>
+                  <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
+                    {selectedArea.youMightBeHereIf.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Choose this week by watching for</p>
+                  <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
+                    {selectedArea.lookFors.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-6 py-10">
+          <div className="mb-8 grid gap-6 lg:grid-cols-2">
+            <div className="rounded-[2rem] border border-sky-200 bg-sky-50 p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Universal</p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                Start here first.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-slate-700">{supportLevelCopy.universal}</p>
+            </div>
+            <div className="rounded-[2rem] border border-emerald-200 bg-emerald-50 p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Intervention</p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                Use when the first layer is not enough.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-slate-700">{supportLevelCopy.intervention}</p>
+            </div>
+          </div>
+
+          <div className="grid gap-8 xl:grid-cols-2">
+            <div>
+              <div className="mb-5 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Universal supports</p>
+                  <h3 className="mt-2 text-2xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    Pick up to 3 to try this week
+                  </h3>
+                </div>
+                <div className="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-700">
+                  {selectedUniversal.length}/3 selected
+                </div>
+              </div>
+              <div className="space-y-4">
+                {selectedArea.universal.map((strategy) => (
+                  <StrategyCard
+                    key={strategy.title}
+                    strategy={strategy}
+                    selected={selectedUniversal.includes(strategy.title)}
+                    onToggle={() => toggleStrategy(strategy.title, "universal")}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <div className="mb-5 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Intervention supports</p>
+                  <h3 className="mt-2 text-2xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    Add up to 2 if needed next
+                  </h3>
+                </div>
+                <div className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+                  {selectedIntervention.length}/2 selected
+                </div>
+              </div>
+              <div className="space-y-4">
+                {selectedArea.intervention.map((strategy) => (
+                  <StrategyCard
+                    key={strategy.title}
+                    strategy={strategy}
+                    selected={selectedIntervention.includes(strategy.title)}
+                    onToggle={() => toggleStrategy(strategy.title, "intervention")}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="plan" className="mx-auto max-w-7xl px-6 py-12">
+          <div className="grid gap-8 xl:grid-cols-[0.85fr_1.15fr]">
+            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Meeting notes</p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                Build this week's plan
+              </h2>
+              <div className="mt-6 space-y-5 text-sm leading-relaxed text-slate-700">
+                <div>
+                  <p className="font-semibold text-slate-950">Observed concern</p>
+                  <p className="mt-1">{selectedConcern.label}</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-950">Likely need area</p>
+                  <p className="mt-1">{selectedArea.name}</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-950">What the team should monitor</p>
+                  <ul className="mt-2 space-y-2">
+                    {selectedArea.lookFors.map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+                  <p className="font-semibold text-slate-950">Suggested meeting questions</p>
+                  <ul className="mt-3 space-y-2 text-slate-600">
+                    <li>What is the teacher seeing most often?</li>
+                    <li>When does it happen?</li>
+                    <li>What has already been tried?</li>
+                    <li>What seems to reduce the problem, even a little?</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Teacher action plan</p>
+                  <h2 className="mt-3 text-3xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    Short enough to use tomorrow
+                  </h2>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
+                >
+                  Print plan
+                </button>
+              </div>
+
+              <div className="mt-8 grid gap-6 lg:grid-cols-2">
+                <div className="rounded-3xl border border-sky-200 bg-sky-50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Universal supports to try now</p>
+                  {selectedUniversalStrategies.length > 0 ? (
+                    <ul className="mt-4 space-y-3 text-sm text-slate-700">
+                      {selectedUniversalStrategies.map((strategy) => (
+                        <li key={strategy.title} className="rounded-2xl bg-white px-4 py-3">
+                          <p className="font-semibold text-slate-950">{strategy.title}</p>
+                          <p className="mt-1 leading-relaxed">{strategy.whenToTry}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                      Select up to 3 universal strategies above to build the week's first layer of support.
+                    </p>
+                  )}
+                </div>
+
+                <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Intervention supports to hold ready</p>
+                  {selectedInterventionStrategies.length > 0 ? (
+                    <ul className="mt-4 space-y-3 text-sm text-slate-700">
+                      {selectedInterventionStrategies.map((strategy) => (
+                        <li key={strategy.title} className="rounded-2xl bg-white px-4 py-3">
+                          <p className="font-semibold text-slate-950">{strategy.title}</p>
+                          <p className="mt-1 leading-relaxed">{strategy.whenToTry}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                      Add up to 2 intervention options if the team needs a stronger next layer after universal supports.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="areas" className="mx-auto max-w-7xl px-6 py-12">
+          <div className="mb-8 max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Support areas</p>
+            <h2 className="mt-3 text-4xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              Browse the first five areas teachers ask for help with most.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-600">
+              These categories cover the most common meeting starting points: attention, behavior,
+              emotional response, participation with others, and literacy access.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {supportAreas.map((area) => (
+              <button
+                key={area.id}
+                type="button"
+                onClick={() => {
+                  setSelectedAreaId(area.id);
+                  document.getElementById("meeting-mode")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="rounded-[1.75rem] border border-slate-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+              >
+                <p className="text-lg font-semibold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  {area.name}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{area.tagline}</p>
+                <p className="mt-5 text-sm font-semibold text-slate-950">Teacher question</p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{area.teacherQuestion}</p>
+              </button>
+            ))}
+          </div>
+        </section>
+      </main>
+    </div>
+  );
 }
 
 export default App;
