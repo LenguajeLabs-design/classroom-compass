@@ -17,7 +17,7 @@ function SupportIcon({
   icon,
   color,
 }: {
-  icon: "focus" | "shield" | "heart" | "group" | "book" | "globe";
+  icon: "focus" | "shield" | "heart" | "group" | "book" | "globe" | "voice";
   color: string;
 }) {
   if (icon === "focus") {
@@ -65,6 +65,17 @@ function SupportIcon({
         <circle cx="11" cy="11" r="7.5" stroke={color} strokeWidth="1.6" />
         <path d="M3.9 11h14.2" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
         <path d="M11 3.8c2.3 2.1 3.5 4.5 3.5 7.2 0 2.7-1.2 5.1-3.5 7.2-2.3-2.1-3.5-4.5-3.5-7.2 0-2.7 1.2-5.1 3.5-7.2Z" stroke={color} strokeWidth="1.6" />
+      </svg>
+    );
+  }
+
+  if (icon === "voice") {
+    return (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <rect x="8.3" y="4.2" width="5.4" height="8.8" rx="2.7" stroke={color} strokeWidth="1.6" />
+        <path d="M6 10.4a5 5 0 0 0 10 0" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+        <path d="M11 15.4v2.4" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+        <path d="M8.3 17.8h5.4" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
       </svg>
     );
   }
@@ -515,6 +526,32 @@ function App() {
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+              {selectedArea.meetingPrompts && selectedArea.meetingPrompts.length > 0 && (
+                <div className="mt-6 rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Meeting prompts</p>
+                  <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
+                    {selectedArea.meetingPrompts.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {selectedArea.avoids && selectedArea.avoids.length > 0 && (
+                <div className="mt-6 rounded-3xl border border-rose-200 bg-rose-50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-700">What teachers should avoid</p>
+                  <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
+                    {selectedArea.avoids.map((item) => (
+                      <div key={item.avoid} className="rounded-2xl border border-rose-100 bg-white px-4 py-3">
+                        <p className="font-semibold text-slate-950">{item.avoid}</p>
+                        <p className="mt-1 text-slate-600">{item.why}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
               <div className="mt-6 rounded-3xl p-5" style={{ backgroundColor: selectedArea.accentSoft }}>

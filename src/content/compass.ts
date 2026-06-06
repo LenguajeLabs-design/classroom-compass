@@ -19,12 +19,14 @@ export type SupportArea = {
   tagline: string;
   accent: string;
   accentSoft: string;
-  icon: "focus" | "shield" | "heart" | "group" | "book" | "globe";
+  icon: "focus" | "shield" | "heart" | "group" | "book" | "globe" | "voice";
   intro: string;
   decisionSupport?: string[];
   youMightBeHereIf: string[];
   teacherQuestion: string;
   lookFors: string[];
+  avoids?: { avoid: string; why: string }[];
+  meetingPrompts?: string[];
   universal: Strategy[];
   intervention: Strategy[];
 };
@@ -577,6 +579,182 @@ export const supportAreas: SupportArea[] = [
           "Is there a clearer pattern after shared data review between EAL and Learning Support?",
         reference:
           "WIDA emphasizes collaboration across language development and disability/support services for multilingual learners with learning needs.",
+      },
+    ],
+  },
+  {
+    id: "speaking-anxiety-selective-mutism",
+    name: "Speaking Anxiety / Selective Mutism",
+    tagline: "For students who can communicate in some settings but freeze, whisper, or avoid speech in school.",
+    accent: "#EF4444",
+    accentSoft: "#FEF2F2",
+    icon: "voice",
+    intro:
+      "Use this area when a student is able to speak in some settings, such as at home or with trusted peers, but does not speak, speaks very little, freezes, whispers, or avoids verbal participation in school. Classroom Compass does not diagnose selective mutism. It helps teams reduce speaking pressure, create safe communication pathways, and build a gradual plan with families and specialists when needed.",
+    decisionSupport: [
+      "The student may understand and know the answer but feel unable to speak in that setting.",
+      "The team may need to reduce pressure and widen what counts as communication.",
+      "The next step should be a smaller communication step, not forced speech.",
+    ],
+    youMightBeHereIf: [
+      "The student speaks comfortably at home or with selected peers but not in class.",
+      "The student freezes when called on unexpectedly.",
+      "The student communicates through gestures, pointing, writing, or whispering instead of speaking aloud.",
+      "The student is at risk of being misread as defiant, low-language, or not understanding.",
+    ],
+    teacherQuestion:
+      "What is the smallest next communication step we can support without forcing speech?",
+    lookFors: [
+      "Whether the student communicates in more ways, with more people, or in more settings",
+      "Whether reducing pressure keeps the student more regulated and engaged",
+      "Whether the student can move from gesture to whisper, writing, or brief speech over time",
+    ],
+    meetingPrompts: [
+      "Where does the student communicate most comfortably?",
+      "Who does the student communicate with?",
+      "What forms of communication are currently possible: gesture, pointing, writing, whispering, recorded voice, peer talk, adult talk?",
+      "What situations increase pressure?",
+      "What is the smallest next communication step we can support without forcing speech?",
+    ],
+    avoids: [
+      { avoid: "Calling on the student unexpectedly", why: "It can trigger freezing or avoidance." },
+      { avoid: 'Saying "You have to speak"', why: "Selective mutism and speaking anxiety are anxiety-based, not defiance." },
+      { avoid: "Bribing or celebrating speech publicly", why: "Public attention can increase pressure and make the next attempt less likely." },
+      { avoid: "Punishing silence", why: "This misunderstands the support need and can worsen anxiety." },
+      { avoid: "Speaking for the student every time", why: "It can remove opportunities for gradual, supported communication." },
+      { avoid: "Assuming the student does not know the answer", why: "The student may understand but be unable to speak in that setting." },
+    ],
+    universal: [
+      {
+        title: "Reduce pressure to speak",
+        level: "Universal",
+        helpsWith: "Students who freeze when directly questioned or when speech is made the focus.",
+        classroomLook:
+          'Avoid calling on the student unexpectedly. Do not say "Use your words" or "You know this." Offer low-pressure ways to respond.',
+        whenToTry:
+          "When direct verbal pressure reliably leads to freezing, avoidance, or visible distress.",
+        bestFor: "Students who become more anxious when adults focus on speech.",
+        supports: "Regulation, participation, and emotional safety.",
+        tryTomorrow:
+          "Remove unexpected verbal demands from one lesson and replace them with planned, lower-pressure response options.",
+        lookFor: "Does the student stay more regulated and engaged when pressure to speak is lowered?",
+        reference:
+          "ASHA recommends minimizing pressure, maintaining a calm demeanor, and allowing nonverbal response options.",
+      },
+      {
+        title: "Accept nonverbal communication",
+        level: "Universal",
+        helpsWith: "Students who can show understanding but cannot speak comfortably in class.",
+        classroomLook:
+          "Allow pointing, nodding, thumbs up/down, drawing, writing, choosing from cards, or using a device.",
+        whenToTry:
+          "When a student is participating cognitively but cannot yet respond verbally in the classroom setting.",
+        bestFor: "Students who need safe communication pathways before speech is possible.",
+        supports: "Participation, access, and evidence of understanding.",
+        tryTomorrow:
+          "Give the student two or three nonverbal ways to respond in the next lesson and explicitly accept those responses.",
+        lookFor: "Can the student participate without speaking?",
+        reference:
+          "ASHA and KidsHealth recommend nonverbal response options such as gestures, writing, drawing, and pointing.",
+      },
+      {
+        title: "Use forced-choice questions",
+        level: "Universal",
+        helpsWith: "Students who cannot answer open-ended verbal questions yet.",
+        classroomLook:
+          'Ask, "Do you want A or B?" or "Is the answer ___ or ___?" and allow the student to point, whisper, or gesture.',
+        whenToTry:
+          "When open-ended questions are too high-pressure but the student may be able to respond within a smaller verbal or nonverbal choice.",
+        bestFor: "Students who need a lower-demand entry into communication.",
+        supports: "Response confidence and reduced pressure.",
+        tryTomorrow:
+          "Convert one open-ended question into a forced-choice question and allow the student to answer nonverbally if needed.",
+        lookFor: "Does the student respond more often with choices than with open questions?",
+        reference:
+          "This aligns with classroom adaptations recommended by ASHA and selective mutism school guidance.",
+      },
+      {
+        title: "Pair with a trusted peer and use small groups first",
+        level: "Universal",
+        helpsWith: "Students who communicate more in safer, smaller social settings.",
+        classroomLook:
+          "Seat the student near a trusted peer and begin with partner or small-group tasks that allow pointing, showing, writing, or quiet rehearsal before whole-class demands.",
+        whenToTry:
+          "When the student shuts down in front of the whole class but may communicate more with one peer or in a small group.",
+        bestFor: "Students whose anxiety decreases with a safe peer or reduced audience size.",
+        supports: "Participation, regulation, and gradual communication.",
+        tryTomorrow:
+          "Start with one partner task or small-group response before any whole-class sharing moment.",
+        lookFor: "Does participation increase near the trusted peer or in smaller settings?",
+        reference:
+          "Child Mind Institute recommends buddy support and small-group opportunities to reduce inhibition.",
+      },
+    ],
+    intervention: [
+      {
+        title: "Communication ladder",
+        level: "Intervention",
+        helpsWith: "Students who need a gradual path toward verbal participation without forced speech.",
+        classroomLook:
+          "Build a ladder from easiest to hardest: point, write, whisper to peer, whisper to adult, one-word answer, short phrase, small-group speaking.",
+        whenToTry:
+          "When the team needs a shared, gradual progression rather than repeated hope that full speech will suddenly appear.",
+        bestFor: "Students who speak in some settings but not in school, or who freeze during verbal participation.",
+        supports: "Gradual communication, anxiety reduction, participation, and evidence collection.",
+        tryTomorrow:
+          "Make a simple ladder with the team and choose one tiny next step the student can reasonably attempt.",
+        lookFor:
+          "Does the student communicate with slightly more independence, with one more person, or in one slightly more challenging setting?",
+        reference:
+          "ASHA and the Selective Mutism Association describe shaping and stimulus fading as common intervention approaches.",
+      },
+      {
+        title: "Stimulus fading with a safe communication partner",
+        level: "Intervention",
+        helpsWith: "Students who speak with one trusted person but not with others.",
+        classroomLook:
+          "Start with the student speaking to a trusted person. Gradually add one new person nearby, then closer, then participating, while keeping anxiety low.",
+        whenToTry:
+          "When the student can already communicate in one safe relationship but cannot generalize that communication to school adults or peers.",
+        bestFor: "Students who need gradual exposure to new communication partners.",
+        supports: "Anxiety reduction and transfer of communication across people and settings.",
+        tryTomorrow:
+          "Identify the safest school communication partner and plan one tiny next exposure step.",
+        lookFor: "Can the student communicate with a new person present, even if the step is very small?",
+        reference:
+          "The Selective Mutism Association and NHS describe stimulus fading as a gradual introduction to less comfortable speaking situations or additional people.",
+      },
+      {
+        title: "Use recorded voice or video as a bridge",
+        level: "Intervention",
+        helpsWith: "Students who can speak at home but not yet at school.",
+        classroomLook:
+          "Let the student record a reading, answer, or greeting at home. Later, use that recording privately or with one safe adult or peer if agreed.",
+        whenToTry:
+          "When the student needs a lower-risk bridge between comfortable communication settings and school participation.",
+        bestFor: "Students whose spoken language is available in some settings but not live at school.",
+        supports: "Participation, confidence, and gradual transfer of voice into school contexts.",
+        tryTomorrow:
+          "Invite one recorded response for a low-stakes task rather than demanding live speech immediately.",
+        lookFor: "Does recorded speech help the student participate or move toward live communication?",
+        reference:
+          "KidsHealth notes that students may need alternatives for verbal assignments, including recorded or home-prepared responses.",
+      },
+      {
+        title: "Team-based support plan and communication tracking",
+        level: "Intervention",
+        helpsWith: "Students with persistent mutism or high speaking anxiety across settings.",
+        classroomLook:
+          "Bring together teacher, counselor, family, EAL if relevant, learning support, and SLP or psychologist if available. Track gestures, writing, whispering, peer communication, adult communication, and group size tolerance.",
+        whenToTry:
+          "When progress is easy to miss or when adults need to align on one gradual communication plan.",
+        bestFor: "Students with persistent concerns who need coordinated support across adults and settings.",
+        supports: "Consistency, evidence collection, and shared next-step planning.",
+        tryTomorrow:
+          "Map where, with whom, and in what form the student already communicates successfully, then align adults around one next step.",
+        lookFor: "Are adults using the same response and seeing communication grow across forms, people, or settings?",
+        reference:
+          "ASHA emphasizes interprofessional collaboration and broader communication tracking, not just speech output alone.",
       },
     ],
   },
