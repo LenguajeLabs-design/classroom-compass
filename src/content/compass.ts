@@ -6,6 +6,11 @@ export type Strategy = {
   helpsWith: string;
   classroomLook: string;
   whenToTry: string;
+  bestFor?: string;
+  supports?: string;
+  tryTomorrow?: string;
+  lookFor?: string;
+  reference?: string;
 };
 
 export type SupportArea = {
@@ -16,6 +21,7 @@ export type SupportArea = {
   accentSoft: string;
   icon: "focus" | "shield" | "heart" | "group" | "book" | "globe";
   intro: string;
+  decisionSupport?: string[];
   youMightBeHereIf: string[];
   teacherQuestion: string;
   lookFors: string[];
@@ -410,7 +416,12 @@ export const supportAreas: SupportArea[] = [
     accentSoft: "#ECFDF5",
     icon: "globe",
     intro:
-      "Some students are navigating both language development and learning support needs at the same time. This area helps teams avoid misreading language load as ability, while still planning the right classroom supports.",
+      "Some students are navigating both language development and learning support needs at the same time. This area helps teams avoid asking, 'Is this EAL or learning support?' and instead ask, 'What access support does this student need right now?'",
+    decisionSupport: [
+      "The student may need language access support.",
+      "The student may need learning support or executive function support.",
+      "The student may need both at the same time.",
+    ],
     youMightBeHereIf: [
       "The student understands more in their first language than in English.",
       "The student seems stuck between language acquisition needs and learning support concerns.",
@@ -433,44 +444,139 @@ export const supportAreas: SupportArea[] = [
           "Use short phrases, clear sentence patterns, chunked directions, repeated key words, and visual supports during teaching and task setup.",
         whenToTry:
           "When a student seems confused during spoken instruction but does better once the language is clarified or modeled.",
+        bestFor:
+          "Students with language processing, working memory, or attention demands who lose track of what to do during English-heavy lessons.",
+        supports: "Language access, comprehension, and task entry.",
+        tryTomorrow:
+          "Put the task into 3 to 4 visible steps and use clear, concise spoken directions with key words repeated and modeled.",
+        lookFor:
+          "Does the student begin more independently and make fewer direction-based errors when the language load is reduced?",
+        reference:
+          "IES and WIDA both emphasize explicit instruction, structured support, and accessible language during content learning for multilingual learners.",
       },
       {
-        title: "Show rather than only tell",
+        title: "Use visuals and models before independent work",
         level: "Universal",
         helpsWith: "Students who need multiple ways to access meaning beyond spoken English.",
         classroomLook:
           "Use gestures, pictures, anchor charts, exemplars, real objects, and modeled responses so the student can connect language to action and meaning.",
         whenToTry:
           "When a student watches peers for clues, hesitates to begin, or seems more successful after seeing a model.",
+        bestFor:
+          'Students who ask "What do I do?" or copy classmates without clear understanding.',
+        supports: "Task clarity, comprehension, and independent entry.",
+        tryTomorrow:
+          "Show a completed example, model the first item, and keep the model visible while students work.",
+        lookFor:
+          "Does the student start faster and make fewer direction-based errors after seeing the model?",
+        reference:
+          "IES recommends using instructional tools and visuals to support academic content learning for English learners.",
       },
       {
-        title: "Reduce output barriers while keeping the thinking",
+        title: "Pre-teach key vocabulary",
         level: "Universal",
-        helpsWith: "Students who understand the concept but cannot yet express it fully in English or in writing.",
+        helpsWith: "Students who seem lost during content lessons because the key academic words are unfamiliar.",
         classroomLook:
-          "Allow sentence frames, word banks, oral response, partner talk, drawing, labeled visuals, or fewer written demands while keeping the core learning goal.",
+          "Choose 5 to 7 essential words before the lesson. Teach each word with a visual, gesture, student-friendly definition, and a sentence frame.",
         whenToTry:
-          "When the task seems to measure English production more than the actual idea or concept.",
+          "When a student looks confused early in the lesson or cannot access the task language well enough to begin.",
+        bestFor:
+          "Students who appear lost during content lessons or struggle to begin tasks with new academic language.",
+        supports: "Vocabulary access, comprehension, confidence, and participation.",
+        tryTomorrow:
+          "Preview a small set of essential words with visuals and revisit them during speaking, reading, and writing in the lesson.",
+        lookFor:
+          "Does the student recognize, use, or point to the vocabulary during the lesson?",
+        reference:
+          "IES recommends explicit academic vocabulary instruction for English learners during content instruction.",
+      },
+      {
+        title: "Provide sentence frames and partner rehearsal",
+        level: "Universal",
+        helpsWith: "Students who have ideas but need language support to get them out in oral or written English.",
+        classroomLook:
+          'Give frames such as "I notice ___," "I think ___ because ___," or "First, I will ___." Let the student rehearse with a partner before sharing or writing.',
+        whenToTry:
+          "When the student participates more in informal talk than in academic speaking or writing tasks.",
+        bestFor: "Students with ideas but limited academic English output.",
+        supports: "Participation, oral rehearsal, and written language production.",
+        tryTomorrow:
+          "Build partner talk into the lesson before writing and give one or two sentence frames students can keep visible.",
+        lookFor:
+          "Does oral rehearsal lead to fuller oral responses or stronger written output?",
+        reference:
+          "WIDA and IES both emphasize interactive language use, discussion, and structured language supports during content learning.",
       },
     ],
     intervention: [
       {
-        title: "Pre-teach key vocabulary and concepts in a smaller setting",
+        title: "Language vs. learning observation check",
         level: "Intervention",
-        helpsWith: "Students who need more front-loading before they can access whole-group instruction.",
+        helpsWith: "Teams that are unsure whether the concern is language, learning, or both.",
         classroomLook:
-          "Preview essential vocabulary, concepts, and task language in a small group or short pre-teaching routine before the main lesson begins.",
+          "Compare how the student does with visuals, home-language planning, oral response, reduced text, and extra processing time before drawing conclusions.",
         whenToTry:
-          "When whole-class instruction moves too quickly for the student to enter confidently without advance language support.",
+          "When a team keeps asking whether a concern belongs to EAL or learning support without enough evidence yet.",
+        bestFor:
+          "Students whose difficulty may come from language access, learning support needs, or the combination of both.",
+        supports: "Decision-making and better evidence for the next meeting.",
+        tryTomorrow:
+          "Test the same task with different access conditions and compare the student's performance across those conditions.",
+        lookFor:
+          "Does the difficulty remain even when language access is improved?",
+        reference:
+          "WIDA encourages collaboration between language specialists and support teams when multilingual learners may also have disabilities or learning needs.",
       },
       {
-        title: "Use individualized visual supports and repeated comprehension checks",
+        title: "Small-group reteach with visuals and oral practice",
         level: "Intervention",
-        helpsWith: "Students who need stronger language scaffolds than whole-class visuals alone provide.",
+        helpsWith: "Students who do not grasp whole-class instruction and need more explicit, smaller-step teaching.",
         classroomLook:
-          "Add individualized visuals, repeated directions, repeat-back checks, and targeted support from EAL or learning support staff to confirm the student understands what to do and how to respond.",
+          "Reteach the same concept in a small group using visuals, gestures, worked examples, and guided oral practice before independent work.",
         whenToTry:
-          "When classwide scaffolds help somewhat but the student still cannot independently follow through on language-heavy tasks.",
+          "When whole-class instruction moves too quickly and the student needs a more supported entry point.",
+        bestFor: "Students who do not grasp whole-class instruction.",
+        supports: "Concept access, language rehearsal, and guided practice.",
+        tryTomorrow:
+          "Pull a short reteach group before or after the lesson and model the concept with visuals and oral response practice.",
+        lookFor:
+          "Does the student understand after smaller, more explicit instruction?",
+        reference:
+          "IES recommends targeted, explicit instruction for English learners' academic language and literacy development.",
+      },
+      {
+        title: "Task initiation conference",
+        level: "Intervention",
+        helpsWith: "Students who freeze, avoid work, or wait passively even after whole-class support is in place.",
+        classroomLook:
+          'Start the task with a 1-minute check-in: "What is the task? What is step one? What help card can you use?"',
+        whenToTry:
+          "When the student understands more once supported but still cannot launch independently.",
+        bestFor: "Students with task initiation, language processing, or executive function overlap.",
+        supports: "Task entry, self-talk, and supported independence.",
+        tryTomorrow:
+          "Meet briefly at the start of one demanding task and leave the student with a visible first step and support option.",
+        lookFor:
+          "Does the student begin within 1 to 2 minutes after the conference?",
+        reference:
+          "Structured, explicit routines align with intervention recommendations for struggling learners and multilingual students who need stronger scaffolds.",
+      },
+      {
+        title: "Collaborative support plan with EAL and learning support",
+        level: "Intervention",
+        helpsWith: "Students with persistent concerns across language-rich tasks where one lens alone is not enough.",
+        classroomLook:
+          "Have EAL and Learning Support compare WIDA or English level data, home-language literacy, reading and writing samples, attention patterns, and response to scaffolds.",
+        whenToTry:
+          "When concerns persist even after strong classroom supports and the team needs a clearer shared pattern.",
+        bestFor: "Students with persistent concerns across language-rich tasks.",
+        supports: "Shared data review and more accurate next-step planning.",
+        tryTomorrow:
+          "Bring one writing sample, one reading sample, and notes on which scaffolds changed the student's performance most.",
+        lookFor:
+          "Is there a clearer pattern after shared data review between EAL and Learning Support?",
+        reference:
+          "WIDA emphasizes collaboration across language development and disability/support services for multilingual learners with learning needs.",
       },
     ],
   },

@@ -132,14 +132,45 @@ function StrategyCard({
           <span className="font-semibold text-slate-900">What it helps with: </span>
           {strategy.helpsWith}
         </p>
+        {strategy.bestFor && (
+          <p>
+            <span className="font-semibold text-slate-900">Best for: </span>
+            {strategy.bestFor}
+          </p>
+        )}
+        {strategy.supports && (
+          <p>
+            <span className="font-semibold text-slate-900">What it supports: </span>
+            {strategy.supports}
+          </p>
+        )}
         <p>
           <span className="font-semibold text-slate-900">What it looks like in class: </span>
           {strategy.classroomLook}
         </p>
-        <p>
-          <span className="font-semibold text-slate-900">When to try it: </span>
-          {strategy.whenToTry}
-        </p>
+        {strategy.tryTomorrow ? (
+          <p>
+            <span className="font-semibold text-slate-900">Try this tomorrow: </span>
+            {strategy.tryTomorrow}
+          </p>
+        ) : (
+          <p>
+            <span className="font-semibold text-slate-900">When to try it: </span>
+            {strategy.whenToTry}
+          </p>
+        )}
+        {strategy.lookFor && (
+          <p>
+            <span className="font-semibold text-slate-900">Look for: </span>
+            {strategy.lookFor}
+          </p>
+        )}
+        {strategy.reference && (
+          <p className="text-xs leading-relaxed text-slate-500">
+            <span className="font-semibold text-slate-700">Reference: </span>
+            {strategy.reference}
+          </p>
+        )}
       </div>
     </button>
   );
@@ -473,6 +504,19 @@ function App() {
                   </ul>
                 </div>
               </div>
+              {selectedArea.decisionSupport && selectedArea.decisionSupport.length > 0 && (
+                <div className="mt-6 rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">This section helps teams separate</p>
+                  <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
+                    {selectedArea.decisionSupport.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <div className="mt-6 rounded-3xl p-5" style={{ backgroundColor: selectedArea.accentSoft }}>
                 <div className="flex items-start gap-4">
                   <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/90">
