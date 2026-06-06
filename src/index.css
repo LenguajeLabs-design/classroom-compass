@@ -131,6 +131,71 @@
   }
 }
 
+@media print {
+  @page {
+    size: auto;
+    margin: 0.45in;
+  }
+
+  html,
+  body {
+    background: white !important;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.35;
+    color: #0f172a;
+  }
+
+  .screen-only {
+    display: none !important;
+  }
+
+  .print-plan {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .plan-grid,
+  .plan-columns {
+    display: block !important;
+  }
+
+  .print-card,
+  .print-compact,
+  .print-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-card {
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    border-radius: 18px !important;
+    padding: 14px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .print-compact {
+    padding: 12px !important;
+  }
+
+  .print-item {
+    padding: 10px 12px !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  li {
+    break-inside: avoid;
+  }
+}
+
 
 /**
  * Using the elevate system.

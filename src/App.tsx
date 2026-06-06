@@ -203,7 +203,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#f8fbff_0%,#f3f7fb_42%,#eef4f8_100%)] text-slate-900">
-      <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+      <header className="screen-only sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
           <a href="#top" className="flex items-center gap-3">
             <CompassMark />
@@ -238,7 +238,7 @@ function App() {
       </header>
 
       <main id="top">
-        <section className="relative overflow-hidden px-6 pb-20 pt-16">
+        <section className="screen-only relative overflow-hidden px-6 pb-20 pt-16">
           <div className="absolute inset-x-0 top-0 -z-10 h-[26rem] bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.18),transparent_35%),radial-gradient(circle_at_top_left,rgba(16,185,129,0.12),transparent_30%)]" />
           <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="max-w-3xl">
@@ -300,7 +300,7 @@ function App() {
           </div>
         </section>
 
-        <section id="concerns" className="mx-auto grid max-w-7xl gap-8 px-6 py-10 lg:grid-cols-[300px_minmax(0,1fr)]">
+        <section id="concerns" className="screen-only mx-auto grid max-w-7xl gap-8 px-6 py-10 lg:grid-cols-[300px_minmax(0,1fr)]">
           <aside className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
             <div className="mb-6">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Browse by area</p>
@@ -383,7 +383,7 @@ function App() {
           </div>
         </section>
 
-        <section id="meeting-mode" className="mx-auto max-w-7xl px-6 py-12">
+        <section id="meeting-mode" className="screen-only mx-auto max-w-7xl px-6 py-12">
           <div className="grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
             <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Likely support areas</p>
@@ -480,7 +480,7 @@ function App() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-10">
+        <section className="screen-only mx-auto max-w-7xl px-6 py-10">
           <div className="mb-8 grid gap-6 lg:grid-cols-2">
             <div className="rounded-[2rem] border border-sky-200 bg-sky-50 p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Universal</p>
@@ -549,9 +549,9 @@ function App() {
           </div>
         </section>
 
-        <section id="plan" className="mx-auto max-w-7xl px-6 py-12">
-          <div className="grid gap-8 xl:grid-cols-[0.85fr_1.15fr]">
-            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+        <section id="plan" className="print-plan mx-auto max-w-7xl px-6 py-12">
+          <div className="plan-grid grid gap-8 xl:grid-cols-[0.85fr_1.15fr]">
+            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm print-card">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Meeting notes</p>
               <h2 className="mt-3 text-3xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 Build this week's plan
@@ -576,7 +576,7 @@ function App() {
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 print-compact">
                   <p className="font-semibold text-slate-950">Suggested meeting questions</p>
                   <ul className="mt-3 space-y-2 text-slate-600">
                     <li>What is the teacher seeing most often?</li>
@@ -588,7 +588,7 @@ function App() {
               </div>
             </div>
 
-            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm print-card">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Teacher action plan</p>
@@ -599,19 +599,19 @@ function App() {
                 <button
                   type="button"
                   onClick={() => window.print()}
-                  className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
+                  className="screen-only rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
                 >
                   Print plan
                 </button>
               </div>
 
-              <div className="mt-8 grid gap-6 lg:grid-cols-2">
-                <div className="rounded-3xl border border-sky-200 bg-sky-50 p-5">
+              <div className="mt-8 grid gap-6 lg:grid-cols-2 plan-columns">
+                <div className="rounded-3xl border border-sky-200 bg-sky-50 p-5 print-compact">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Universal supports to try now</p>
                   {selectedUniversalStrategies.length > 0 ? (
                     <ul className="mt-4 space-y-3 text-sm text-slate-700">
                       {selectedUniversalStrategies.map((strategy) => (
-                        <li key={strategy.title} className="rounded-2xl bg-white px-4 py-3">
+                        <li key={strategy.title} className="rounded-2xl bg-white px-4 py-3 print-item">
                           <p className="font-semibold text-slate-950">{strategy.title}</p>
                           <p className="mt-1 leading-relaxed">{strategy.whenToTry}</p>
                         </li>
@@ -624,12 +624,12 @@ function App() {
                   )}
                 </div>
 
-                <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5">
+                <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5 print-compact">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Intervention supports to hold ready</p>
                   {selectedInterventionStrategies.length > 0 ? (
                     <ul className="mt-4 space-y-3 text-sm text-slate-700">
                       {selectedInterventionStrategies.map((strategy) => (
-                        <li key={strategy.title} className="rounded-2xl bg-white px-4 py-3">
+                        <li key={strategy.title} className="rounded-2xl bg-white px-4 py-3 print-item">
                           <p className="font-semibold text-slate-950">{strategy.title}</p>
                           <p className="mt-1 leading-relaxed">{strategy.whenToTry}</p>
                         </li>
@@ -646,7 +646,7 @@ function App() {
           </div>
         </section>
 
-        <section id="areas" className="mx-auto max-w-7xl px-6 py-12">
+        <section id="areas" className="screen-only mx-auto max-w-7xl px-6 py-12">
           <div className="mb-8 max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Support areas</p>
             <h2 className="mt-3 text-4xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
