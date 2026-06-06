@@ -17,7 +17,7 @@ function SupportIcon({
   icon,
   color,
 }: {
-  icon: "focus" | "shield" | "heart" | "group" | "book";
+  icon: "focus" | "shield" | "heart" | "group" | "book" | "globe";
   color: string;
 }) {
   if (icon === "focus") {
@@ -55,6 +55,16 @@ function SupportIcon({
         <circle cx="14.8" cy="8.8" r="2.2" stroke={color} strokeWidth="1.6" />
         <path d="M3.8 17c0-2.4 2-4.2 4.4-4.2s4.4 1.8 4.4 4.2" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
         <path d="M12.7 16.4c.2-1.9 1.8-3.2 3.8-3.2 1.2 0 2.2.4 2.9 1.2" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (icon === "globe") {
+    return (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <circle cx="11" cy="11" r="7.5" stroke={color} strokeWidth="1.6" />
+        <path d="M3.9 11h14.2" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+        <path d="M11 3.8c2.3 2.1 3.5 4.5 3.5 7.2 0 2.7-1.2 5.1-3.5 7.2-2.3-2.1-3.5-4.5-3.5-7.2 0-2.7 1.2-5.1 3.5-7.2Z" stroke={color} strokeWidth="1.6" />
       </svg>
     );
   }

@@ -14,7 +14,7 @@ export type SupportArea = {
   tagline: string;
   accent: string;
   accentSoft: string;
-  icon: "focus" | "shield" | "heart" | "group" | "book";
+  icon: "focus" | "shield" | "heart" | "group" | "book" | "globe";
   intro: string;
   youMightBeHereIf: string[];
   teacherQuestion: string;
@@ -399,6 +399,78 @@ export const supportAreas: SupportArea[] = [
         classroomLook:
           "Use speech-to-text, text-to-speech, adaptive learning platforms, vocabulary banks, and sentence stems so the student can access content and express ideas with less bottleneck.",
         whenToTry: "When the barrier is no longer just strategy, but access to the task itself.",
+      },
+    ],
+  },
+  {
+    id: "english-language-overlap",
+    name: "English Language + Learning Support Overlap",
+    tagline: "For students who are English learners and may also need learning support scaffolds.",
+    accent: "#10B981",
+    accentSoft: "#ECFDF5",
+    icon: "globe",
+    intro:
+      "Some students are navigating both language development and learning support needs at the same time. This area helps teams avoid misreading language load as ability, while still planning the right classroom supports.",
+    youMightBeHereIf: [
+      "The student understands more in their first language than in English.",
+      "The student seems stuck between language acquisition needs and learning support concerns.",
+      "The student needs more visuals, modeling, and reduced language load to show what they know.",
+      "It is hard to tell whether the main barrier is English access, processing, literacy demand, or all three together.",
+    ],
+    teacherQuestion:
+      "Are we looking at a lack of understanding, or is the language of the task hiding what this student actually knows?",
+    lookFors: [
+      "Whether visuals and simplified language improve independence",
+      "Whether the student can show more understanding orally, with gestures, or in another language",
+      "Whether reduced language load changes the quality of participation",
+    ],
+    universal: [
+      {
+        title: "Simplify and chunk classroom language",
+        level: "Universal",
+        helpsWith: "Students who lose meaning when directions or explanations are too language-heavy.",
+        classroomLook:
+          "Use short phrases, clear sentence patterns, chunked directions, repeated key words, and visual supports during teaching and task setup.",
+        whenToTry:
+          "When a student seems confused during spoken instruction but does better once the language is clarified or modeled.",
+      },
+      {
+        title: "Show rather than only tell",
+        level: "Universal",
+        helpsWith: "Students who need multiple ways to access meaning beyond spoken English.",
+        classroomLook:
+          "Use gestures, pictures, anchor charts, exemplars, real objects, and modeled responses so the student can connect language to action and meaning.",
+        whenToTry:
+          "When a student watches peers for clues, hesitates to begin, or seems more successful after seeing a model.",
+      },
+      {
+        title: "Reduce output barriers while keeping the thinking",
+        level: "Universal",
+        helpsWith: "Students who understand the concept but cannot yet express it fully in English or in writing.",
+        classroomLook:
+          "Allow sentence frames, word banks, oral response, partner talk, drawing, labeled visuals, or fewer written demands while keeping the core learning goal.",
+        whenToTry:
+          "When the task seems to measure English production more than the actual idea or concept.",
+      },
+    ],
+    intervention: [
+      {
+        title: "Pre-teach key vocabulary and concepts in a smaller setting",
+        level: "Intervention",
+        helpsWith: "Students who need more front-loading before they can access whole-group instruction.",
+        classroomLook:
+          "Preview essential vocabulary, concepts, and task language in a small group or short pre-teaching routine before the main lesson begins.",
+        whenToTry:
+          "When whole-class instruction moves too quickly for the student to enter confidently without advance language support.",
+      },
+      {
+        title: "Use individualized visual supports and repeated comprehension checks",
+        level: "Intervention",
+        helpsWith: "Students who need stronger language scaffolds than whole-class visuals alone provide.",
+        classroomLook:
+          "Add individualized visuals, repeated directions, repeat-back checks, and targeted support from EAL or learning support staff to confirm the student understands what to do and how to respond.",
+        whenToTry:
+          "When classwide scaffolds help somewhat but the student still cannot independently follow through on language-heavy tasks.",
       },
     ],
   },
