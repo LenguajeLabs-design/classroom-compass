@@ -576,7 +576,7 @@ function App() {
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4 print-compact">
+                <div className="screen-only rounded-3xl border border-slate-200 bg-slate-50 p-4 print-compact">
                   <p className="font-semibold text-slate-950">Suggested meeting questions</p>
                   <ul className="mt-3 space-y-2 text-slate-600">
                     <li>What is the teacher seeing most often?</li>
@@ -613,7 +613,7 @@ function App() {
                       {selectedUniversalStrategies.map((strategy) => (
                         <li key={strategy.title} className="rounded-2xl bg-white px-4 py-3 print-item">
                           <p className="font-semibold text-slate-950">{strategy.title}</p>
-                          <p className="mt-1 leading-relaxed">{strategy.whenToTry}</p>
+                          <p className="mt-1 leading-relaxed screen-only">{strategy.whenToTry}</p>
                         </li>
                       ))}
                     </ul>
@@ -631,7 +631,7 @@ function App() {
                       {selectedInterventionStrategies.map((strategy) => (
                         <li key={strategy.title} className="rounded-2xl bg-white px-4 py-3 print-item">
                           <p className="font-semibold text-slate-950">{strategy.title}</p>
-                          <p className="mt-1 leading-relaxed">{strategy.whenToTry}</p>
+                          <p className="mt-1 leading-relaxed screen-only">{strategy.whenToTry}</p>
                         </li>
                       ))}
                     </ul>
@@ -641,6 +641,18 @@ function App() {
                     </p>
                   )}
                 </div>
+              </div>
+
+              <div className="print-only mt-5 rounded-3xl border border-slate-200 bg-slate-50 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">What to monitor this week</p>
+                <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                  {selectedArea.lookFors.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>

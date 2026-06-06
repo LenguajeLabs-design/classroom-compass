@@ -152,6 +152,10 @@
     display: none !important;
   }
 
+  .print-only {
+    display: block !important;
+  }
+
   .print-plan {
     max-width: none !important;
     padding: 0 !important;
@@ -174,16 +178,16 @@
     border: 1px solid #cbd5e1 !important;
     box-shadow: none !important;
     border-radius: 18px !important;
-    padding: 14px !important;
-    margin-bottom: 12px !important;
+    padding: 12px !important;
+    margin-bottom: 10px !important;
   }
 
   .print-compact {
-    padding: 12px !important;
+    padding: 10px !important;
   }
 
   .print-item {
-    padding: 10px 12px !important;
+    padding: 8px 10px !important;
   }
 
   h1,
@@ -194,6 +198,50 @@
   li {
     break-inside: avoid;
   }
+
+  h2 {
+    font-size: 18pt !important;
+    line-height: 1.15 !important;
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+  }
+
+  h3,
+  h4 {
+    font-size: 11pt !important;
+    line-height: 1.2 !important;
+  }
+
+  p,
+  li {
+    font-size: 9.5pt !important;
+    line-height: 1.25 !important;
+  }
+
+  .print-plan .mt-8,
+  .print-plan .mt-6,
+  .print-plan .mt-5,
+  .print-plan .mt-4,
+  .print-plan .mt-3,
+  .print-plan .mt-2 {
+    margin-top: 0.45rem !important;
+  }
+
+  .print-plan .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.55rem !important;
+  }
+
+  .print-plan .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.35rem !important;
+  }
+
+  .print-plan .space-y-2 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.22rem !important;
+  }
+}
+
+.print-only {
+  display: none;
 }
 
 
