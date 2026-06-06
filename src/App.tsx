@@ -13,6 +13,60 @@ function CompassMark() {
   );
 }
 
+function SupportIcon({
+  icon,
+  color,
+}: {
+  icon: "focus" | "shield" | "heart" | "group" | "book";
+  color: string;
+}) {
+  if (icon === "focus") {
+    return (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <circle cx="11" cy="11" r="7.5" stroke={color} strokeWidth="1.6" />
+        <circle cx="11" cy="11" r="3.2" stroke={color} strokeWidth="1.6" />
+        <circle cx="11" cy="11" r="0.9" fill={color} />
+      </svg>
+    );
+  }
+
+  if (icon === "shield") {
+    return (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <path d="M11 3.5 17 6v4.9c0 3.7-2.4 6.2-6 7.6-3.6-1.4-6-3.9-6-7.6V6l6-2.5Z" stroke={color} strokeWidth="1.6" />
+        <path d="m8.6 11.2 1.6 1.6 3.2-3.3" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (icon === "heart") {
+    return (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <path d="M11 18s-6-3.8-6-8.7C5 6.9 6.7 5.5 8.7 5.5c1.3 0 2.3.6 3.3 1.8 1-1.2 2-1.8 3.3-1.8 2 0 3.7 1.4 3.7 3.8 0 4.9-6 8.7-6 8.7Z" stroke={color} strokeWidth="1.6" />
+        <path d="M8.5 10.8h1.7l.8-1.6 1.4 3 1-1.6h1.9" stroke={color} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (icon === "group") {
+    return (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <circle cx="8" cy="8.2" r="2.6" stroke={color} strokeWidth="1.6" />
+        <circle cx="14.8" cy="8.8" r="2.2" stroke={color} strokeWidth="1.6" />
+        <path d="M3.8 17c0-2.4 2-4.2 4.4-4.2s4.4 1.8 4.4 4.2" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+        <path d="M12.7 16.4c.2-1.9 1.8-3.2 3.8-3.2 1.2 0 2.2.4 2.9 1.2" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+      <path d="M5.5 4.5h5.3c1 0 1.7.8 1.7 1.7v11.3H7.2c-.9 0-1.7-.8-1.7-1.7V4.5Z" stroke={color} strokeWidth="1.6" />
+      <path d="M16.5 4.5h-5.3c-1 0-1.7.8-1.7 1.7v11.3h5.3c.9 0 1.7-.8 1.7-1.7V4.5Z" stroke={color} strokeWidth="1.6" />
+    </svg>
+  );
+}
+
 function StrategyCard({
   strategy,
   selected,
@@ -86,6 +140,7 @@ function App() {
   const [selectedAreaId, setSelectedAreaId] = useState("attention-focus");
   const [selectedUniversal, setSelectedUniversal] = useState<string[]>([]);
   const [selectedIntervention, setSelectedIntervention] = useState<string[]>([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     document.documentElement.classList.remove("dark");
@@ -139,6 +194,12 @@ function App() {
   const selectedInterventionStrategies = selectedArea.intervention.filter((strategy) =>
     selectedIntervention.includes(strategy.title),
   );
+  const filteredConcerns = concerns.filter((concern) =>
+    `${concern.label} ${concern.summary}`.toLowerCase().includes(query.toLowerCase()),
+  );
+  const filteredAreas = supportAreas.filter((area) =>
+    `${area.name} ${area.tagline} ${area.intro}`.toLowerCase().includes(query.toLowerCase()),
+  );
 
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#f8fbff_0%,#f3f7fb_42%,#eef4f8_100%)] text-slate-900">
@@ -153,7 +214,21 @@ function App() {
               <p className="text-sm text-slate-500">Practical supports for teacher meetings</p>
             </div>
           </a>
-          <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
+          <div className="hidden max-w-xl flex-1 px-4 lg:block">
+            <div className="relative">
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search concerns, support areas, or strategies..."
+                className="h-12 w-full rounded-full border border-slate-200 bg-slate-50 pl-12 pr-4 text-sm text-slate-700 shadow-inner outline-none transition focus:border-slate-300 focus:bg-white"
+              />
+              <svg className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m21 21-4.35-4.35M10.8 18a7.2 7.2 0 1 0 0-14.4 7.2 7.2 0 0 0 0 14.4Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+            </div>
+          </div>
+          <nav className="hidden items-center gap-6 text-sm text-slate-600 xl:flex">
             <a href="#concerns" className="hover:text-slate-950">Concerns</a>
             <a href="#meeting-mode" className="hover:text-slate-950">Meeting Mode</a>
             <a href="#areas" className="hover:text-slate-950">Support Areas</a>
@@ -225,39 +300,86 @@ function App() {
           </div>
         </section>
 
-        <section id="concerns" className="mx-auto max-w-7xl px-6 py-10">
-          <div className="mb-8 max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Start with what you see</p>
-            <h2 className="mt-3 text-4xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Teachers usually notice the problem before they know the reason.
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-slate-600">
-              Choose the classroom challenge that sounds most like your student. Then use Classroom
-              Compass to slow the decision-making down and choose supports that are more likely to help.
-            </p>
-          </div>
+        <section id="concerns" className="mx-auto grid max-w-7xl gap-8 px-6 py-10 lg:grid-cols-[300px_minmax(0,1fr)]">
+          <aside className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="mb-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Browse by area</p>
+              <h2 className="mt-3 text-2xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                Teacher support areas
+              </h2>
+            </div>
+            <div className="space-y-2">
+              {filteredAreas.map((area) => {
+                const selected = area.id === selectedArea.id;
+                return (
+                  <button
+                    key={area.id}
+                    type="button"
+                    onClick={() => {
+                      setSelectedAreaId(area.id);
+                      document.getElementById("meeting-mode")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className={`flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left transition ${
+                      selected ? "bg-slate-100" : "hover:bg-slate-50"
+                    }`}
+                  >
+                    <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl" style={{ backgroundColor: area.accentSoft }}>
+                      <SupportIcon icon={area.icon} color={area.accent} />
+                    </div>
+                    <div>
+                      <p className="text-base font-semibold text-slate-950">{area.name}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-slate-500">{area.tagline}</p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </aside>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {concerns.map((concern) => {
-              const selected = concern.id === selectedConcern.id;
-              return (
-                <button
-                  key={concern.id}
-                  type="button"
-                  onClick={() => chooseConcern(concern.id)}
-                  className={`rounded-[1.75rem] border p-5 text-left transition-all ${
-                    selected
-                      ? "border-sky-400 bg-sky-50 shadow-md"
-                      : "border-slate-200 bg-white hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"
-                  }`}
-                >
-                  <h3 className="text-xl font-semibold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                    {concern.label}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{concern.summary}</p>
-                </button>
-              );
-            })}
+          <div>
+            <div className="mb-8 max-w-3xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Start with what you see</p>
+              <h2 className="mt-3 text-4xl font-bold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                Teachers usually notice the problem before they know the reason.
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
+                Choose the classroom challenge that sounds most like your student. Then use Classroom
+                Compass to slow the decision-making down and choose supports that are more likely to help.
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {filteredConcerns.map((concern) => {
+                const selected = concern.id === selectedConcern.id;
+                const accentArea = supportAreas.find((area) => area.id === concern.supportAreaIds[0]) ?? supportAreas[0];
+                return (
+                  <button
+                    key={concern.id}
+                    type="button"
+                    onClick={() => chooseConcern(concern.id)}
+                    className={`rounded-[1.75rem] border p-5 text-left transition-all ${
+                      selected
+                        ? "border-slate-900 bg-slate-950 text-white shadow-md"
+                        : "border-slate-200 bg-white hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"
+                    }`}
+                  >
+                    <div
+                      className="mb-4 inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em]"
+                      style={{
+                        backgroundColor: selected ? "rgba(255,255,255,0.14)" : accentArea.accentSoft,
+                        color: selected ? "#ffffff" : accentArea.accent,
+                      }}
+                    >
+                      {accentArea.name}
+                    </div>
+                    <h3 className={`text-xl font-semibold ${selected ? "text-white" : "text-slate-950"}`} style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                      {concern.label}
+                    </h3>
+                    <p className={`mt-3 text-sm leading-relaxed ${selected ? "text-slate-200" : "text-slate-600"}`}>{concern.summary}</p>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </section>
 
@@ -286,12 +408,19 @@ function App() {
                           : "border-slate-200 bg-slate-50 hover:border-slate-300 hover:bg-white"
                       }`}
                     >
-                      <p className={`text-lg font-semibold ${selected ? "text-white" : "text-slate-950"}`} style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                        {area.name}
-                      </p>
-                      <p className={`mt-2 text-sm leading-relaxed ${selected ? "text-slate-200" : "text-slate-600"}`}>
-                        {area.tagline}
-                      </p>
+                      <div className="flex items-start gap-3">
+                        <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl" style={{ backgroundColor: selected ? "rgba(255,255,255,0.14)" : area.accentSoft }}>
+                          <SupportIcon icon={area.icon} color={selected ? "#ffffff" : area.accent} />
+                        </div>
+                        <div>
+                          <p className={`text-lg font-semibold ${selected ? "text-white" : "text-slate-950"}`} style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                            {area.name}
+                          </p>
+                          <p className={`mt-2 text-sm leading-relaxed ${selected ? "text-slate-200" : "text-slate-600"}`}>
+                            {area.tagline}
+                          </p>
+                        </div>
+                      </div>
                     </button>
                   );
                 })}
@@ -332,6 +461,19 @@ function App() {
                       </li>
                     ))}
                   </ul>
+                </div>
+              </div>
+              <div className="mt-6 rounded-3xl p-5" style={{ backgroundColor: selectedArea.accentSoft }}>
+                <div className="flex items-start gap-4">
+                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/90">
+                    <SupportIcon icon={selectedArea.icon} color={selectedArea.accent} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: selectedArea.accent }}>
+                      Teacher question
+                    </p>
+                    <p className="mt-2 text-base leading-relaxed text-slate-700">"{selectedArea.teacherQuestion}"</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -527,7 +669,10 @@ function App() {
                 }}
                 className="rounded-[1.75rem] border border-slate-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
               >
-                <p className="text-lg font-semibold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                <div className="grid h-14 w-14 place-items-center rounded-[1.25rem]" style={{ backgroundColor: area.accentSoft }}>
+                  <SupportIcon icon={area.icon} color={area.accent} />
+                </div>
+                <p className="mt-5 text-lg font-semibold text-slate-950" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                   {area.name}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">{area.tagline}</p>
