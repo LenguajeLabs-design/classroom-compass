@@ -2,9 +2,10 @@ import { useMemo, useState } from "react";
 import { concerns, supportAreas, type Strategy, type SupportArea } from "@/content/compass";
 
 const steps = ["Notice", "Consider", "Choose", "Act"];
+const assetPath = (filename: string) => `${import.meta.env.BASE_URL}${filename}`;
 
 function CompassMark() {
-  return <div className="brand-mark" aria-hidden="true"><img src="/classroom-compass-mark.svg" alt="" width="48" height="48" /></div>;
+  return <div className="brand-mark" aria-hidden="true"><img src={assetPath("classroom-compass-mark.svg")} alt="" width="48" height="48" /></div>;
 }
 
 function AreaIcon({ area }: { area: SupportArea }) {
@@ -21,7 +22,7 @@ function AreaIcon({ area }: { area: SupportArea }) {
 }
 
 function Stepper({ current, onStep }: { current: number; onStep: (step: number) => void }) {
-  return <nav className={`stepper stepper-progress-${current} screen-only`} aria-label="Plan progress">{steps.map((label, index) => <button key={label} type="button" className={`step ${index === current ? "is-current" : ""} ${index < current ? "is-complete" : ""}`} onClick={() => index <= current && onStep(index)} disabled={index > current} aria-current={index === current ? "step" : undefined}><span className="step-number">{index === current ? <img className="route-compass" src="/favicon.svg" alt="" aria-hidden="true" /> : index < current ? "✓" : index + 1}</span><span>{label}</span></button>)}</nav>;
+  return <nav className={`stepper stepper-progress-${current} screen-only`} aria-label="Plan progress">{steps.map((label, index) => <button key={label} type="button" className={`step ${index === current ? "is-current" : ""} ${index < current ? "is-complete" : ""}`} onClick={() => index <= current && onStep(index)} disabled={index > current} aria-current={index === current ? "step" : undefined}><span className="step-number">{index === current ? <img className="route-compass" src={assetPath("favicon.svg")} alt="" aria-hidden="true" /> : index < current ? "✓" : index + 1}</span><span>{label}</span></button>)}</nav>;
 }
 
 function StrategyOption({ strategy, selected, onToggle }: { strategy: Strategy; selected: boolean; onToggle: () => void }) {
