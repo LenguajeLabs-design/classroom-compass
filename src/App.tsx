@@ -4,7 +4,7 @@ import { concerns, supportAreas, type Strategy, type SupportArea } from "@/conte
 const steps = ["Notice", "Consider", "Choose", "Act"];
 
 function CompassMark() {
-  return <div className="brand-mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7.5" stroke="currentColor" strokeWidth="1.5"/><path d="M13.8 8.2 12 13.6 6.6 15.4 8.4 10z" fill="currentColor"/><circle cx="11" cy="11" r="1.2" fill="white"/></svg></div>;
+  return <div className="brand-mark" aria-hidden="true"><img src="/classroom-compass-mark.svg" alt="" width="48" height="48" /></div>;
 }
 
 function AreaIcon({ area }: { area: SupportArea }) {
@@ -21,7 +21,7 @@ function AreaIcon({ area }: { area: SupportArea }) {
 }
 
 function Stepper({ current, onStep }: { current: number; onStep: (step: number) => void }) {
-  return <nav className={`stepper stepper-progress-${current} screen-only`} aria-label="Plan progress">{steps.map((label, index) => <button key={label} type="button" className={`step ${index === current ? "is-current" : ""} ${index < current ? "is-complete" : ""}`} onClick={() => index <= current && onStep(index)} disabled={index > current} aria-current={index === current ? "step" : undefined}><span className="step-number">{index === current ? <svg className="route-compass" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="m15.6 8.4-2.1 5.1-5.1 2.1 2.1-5.1 5.1-2.1Z" fill="currentColor"/><circle cx="12" cy="12" r="1.15" fill="white" stroke="none"/></svg> : index < current ? "✓" : index + 1}</span><span>{label}</span></button>)}</nav>;
+  return <nav className={`stepper stepper-progress-${current} screen-only`} aria-label="Plan progress">{steps.map((label, index) => <button key={label} type="button" className={`step ${index === current ? "is-current" : ""} ${index < current ? "is-complete" : ""}`} onClick={() => index <= current && onStep(index)} disabled={index > current} aria-current={index === current ? "step" : undefined}><span className="step-number">{index === current ? <img className="route-compass" src="/favicon.svg" alt="" aria-hidden="true" /> : index < current ? "✓" : index + 1}</span><span>{label}</span></button>)}</nav>;
 }
 
 function StrategyOption({ strategy, selected, onToggle }: { strategy: Strategy; selected: boolean; onToggle: () => void }) {
