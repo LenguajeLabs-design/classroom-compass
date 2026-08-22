@@ -1,15 +1,23 @@
 import { useMemo, useState } from "react";
 import { concerns, supportAreas, type Strategy, type SupportArea } from "@/content/compass";
 
-const steps = ["Concern", "Likely need", "Supports", "Plan"];
+const steps = ["Notice", "Consider", "Choose", "Act"];
 
 function CompassMark() {
   return <div className="brand-mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7.5" stroke="currentColor" strokeWidth="1.5"/><path d="M13.8 8.2 12 13.6 6.6 15.4 8.4 10z" fill="currentColor"/><circle cx="11" cy="11" r="1.2" fill="white"/></svg></div>;
 }
 
 function AreaIcon({ area }: { area: SupportArea }) {
-  const icons = { focus: "◎", shield: "◇", heart: "♡", group: "◌", book: "▤", globe: "◎", voice: "♬" };
-  return <span className="area-icon" style={{ backgroundColor: area.accentSoft, color: area.accent }} aria-hidden="true">{icons[area.icon]}</span>;
+  const paths = {
+    focus: <><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/></>,
+    shield: <><path d="M12 3.5 18 6v5c0 3.7-2.4 6.4-6 8-3.6-1.6-6-4.3-6-8V6l6-2.5Z"/><path d="m9.5 11.5 1.6 1.6 3.6-3.7"/></>,
+    heart: <path d="M12 19s-7-4.2-7-9.4A3.9 3.9 0 0 1 12 7.2a3.9 3.9 0 0 1 7 2.4C19 14.8 12 19 12 19Z"/>,
+    group: <><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3.5 19c0-3.2 2.5-5.5 5.6-5.5s5.6 2.3 5.6 5.5M14.5 15c.8-.7 1.8-1 3-1 1.7 0 3 .7 3.8 1.8"/></>,
+    book: <><path d="M4.5 5h5a3 3 0 0 1 3 3v11a3 3 0 0 0-3-3h-5V5Z"/><path d="M19.5 5h-5a3 3 0 0 0-3 3v11a3 3 0 0 1 3-3h5V5Z"/></>,
+    globe: <><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.2 2.3 3.3 5 3.3 8S14.2 17.7 12 20c-2.2-2.3-3.3-5-3.3-8S9.8 6.3 12 4Z"/></>,
+    voice: <><rect x="9" y="4" width="6" height="10" rx="3"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v3M9 20h6"/></>,
+  };
+  return <span className="area-icon" style={{ backgroundColor: area.accentSoft, color: area.accent }} aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{paths[area.icon]}</svg></span>;
 }
 
 function Stepper({ current, onStep }: { current: number; onStep: (step: number) => void }) {
@@ -26,7 +34,7 @@ function StrategyOption({ strategy, selected, onToggle }: { strategy: Strategy; 
 function PlanSummary({ area, concernLabel, universal, intervention, compact = false }: { area: SupportArea; concernLabel: string; universal: Strategy[]; intervention: Strategy[]; compact?: boolean }) {
   const total = universal.length + intervention.length;
   return <div className={compact ? "plan-summary compact" : "plan-summary"}>
-    <div className="plan-summary-heading"><div><p className="eyebrow">Your plan</p><h2>{total ? `${total} support${total === 1 ? "" : "s"} selected` : "Ready when you are"}</h2></div><span className="plan-count" aria-label={`${total} supports selected`}>{total}</span></div>
+    <div className="plan-summary-heading"><div><p className="eyebrow">Meeting brief</p><h2>{total ? `${total} support${total === 1 ? "" : "s"} selected` : "Ready when you are"}</h2></div><span className="plan-count" aria-label={`${total} supports selected`}>{total}</span></div>
     {!compact && <><dl className="plan-facts"><div><dt>Concern</dt><dd>{concernLabel}</dd></div><div><dt>Likely need</dt><dd>{area.name}</dd></div></dl>{total === 0 ? <div className="empty-state"><p>Choose a few practical supports to create a plan for this week.</p></div> : <div className="plan-picks">{universal.map(item => <p key={item.title}><span className="dot universal-dot"/>{item.title}</p>)}{intervention.map(item => <p key={item.title}><span className="dot intervention-dot"/>{item.title}</p>)}</div>}</>}
   </div>;
 }
@@ -70,7 +78,10 @@ function App() {
     <a className="skip-link" href="#workspace">Skip to plan builder</a>
     <header className="app-header screen-only"><div className="header-inner"><button type="button" className="brand" onClick={reset} aria-label="Classroom Compass home"><CompassMark/><span><strong>Classroom Compass</strong><small>Practical support planning</small></span></button><button type="button" className="quiet-button" onClick={reset}>Start a new plan</button></div></header>
     <main id="workspace" className="workspace">
-      <section className="intro screen-only"><p className="eyebrow">Problem to plan</p><h1>Find a helpful next step for a student.</h1><p>Start with what you notice. Classroom Compass will guide you toward practical supports for this week.</p><div className="safety-note"><span aria-hidden="true">i</span>This tool supports teacher decision-making. It does not diagnose students.</div></section>
+      <section className="intro screen-only">
+        <div className="intro-copy"><p className="eyebrow">Problem to plan</p><h1>Find a helpful next step for a student.</h1><p>Start with what you notice. Classroom Compass will guide you toward practical supports for this week.</p><div className="safety-note"><span aria-hidden="true">i</span>This tool supports teacher decision-making. It does not diagnose students.</div></div>
+        <aside className="outcome-card" aria-label="What the plan includes"><div className="outcome-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 27c0-9 2-15 10-20M16 20c-4-1-7-4-8-8 5 0 8 2 9 5M19 15c1-5 4-8 9-9 0 5-2 8-7 10"/></svg></div><div><h2>You’ll leave with</h2><ul><li><span>✓</span>1–3 practical supports</li><li><span>◎</span>One monitoring focus</li><li><span>□</span>A printable meeting plan</li></ul></div></aside>
+      </section>
       <Stepper current={step} onStep={goToStep}/>
       <div className="workspace-grid">
         <section className="flow-card" aria-labelledby={`step-${step}-title`}>
