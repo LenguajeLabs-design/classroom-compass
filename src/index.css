@@ -66,13 +66,18 @@ button:focus-visible, input:focus-visible, summary:focus-visible, a:focus-visibl
 .outcome-card li span { width: 22px; height: 22px; display: grid; place-items: center; color: #47745a; font-weight: 750; }
 
 .stepper { max-width: none; margin: 0 0 20px; display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
-.stepper::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 18px; height: 2px; background: repeating-linear-gradient(90deg, #bfb6a5 0 9px, transparent 9px 15px); }
+.stepper::before { content: ""; position: absolute; left: 0; right: 0; top: 18px; height: 2px; background: repeating-linear-gradient(90deg, #bfb6a5 0 9px, transparent 9px 15px); }
+.stepper::after { content: ""; position: absolute; left: 0; top: 18px; z-index: 0; height: 2px; background: var(--accent); transition: width .24s ease; }
+.stepper-progress-0::after { width: 12.5%; }
+.stepper-progress-1::after { width: 37.5%; }
+.stepper-progress-2::after { width: 62.5%; }
+.stepper-progress-3::after { width: 87.5%; }
 .step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 7px; border: 0; background: transparent; color: #8a94a3; font-size: 12px; font-weight: 650; cursor: pointer; }
 .step:disabled { cursor: default; }
 .step-number { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid #b7ad9b; border-radius: 50%; background: var(--bg); font-family: var(--display); font-size: 16px; }
 .step.is-current { color: var(--text); }
-.step.is-current .step-number { border-color: var(--accent); background: var(--surface); color: transparent; box-shadow: 0 0 0 5px rgba(22,78,174,.08); }
-.step.is-current .step-number::after { content: ""; width: 16px; height: 16px; background: var(--accent); clip-path: polygon(82% 0, 62% 62%, 0 82%, 38% 38%); transform: rotate(12deg); }
+.step.is-current .step-number { border: 2px solid var(--accent); background: var(--surface); color: var(--accent); box-shadow: 0 0 0 5px rgba(22,78,174,.08); }
+.route-compass { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.5; }
 .step.is-complete { color: var(--accent); }
 .step.is-complete .step-number { border-color: var(--accent); background: var(--accent); color: white; }
 
@@ -218,7 +223,7 @@ button:focus-visible, input:focus-visible, summary:focus-visible, a:focus-visibl
   .stepper::before { top: 15px; }
   .step { font-size: 10px; }
   .step-number { width: 30px; height: 30px; font-size: 11px; }
-  .step.is-current .step-number::after { width: 13px; height: 13px; }
+  .route-compass { width: 20px; height: 20px; }
   .flow-card { border-radius: 20px; min-height: 0; }
   .step-panel { padding: 22px 18px; }
   .section-heading h2 { font-size: 30px; }

@@ -21,7 +21,7 @@ function AreaIcon({ area }: { area: SupportArea }) {
 }
 
 function Stepper({ current, onStep }: { current: number; onStep: (step: number) => void }) {
-  return <nav className="stepper screen-only" aria-label="Plan progress">{steps.map((label, index) => <button key={label} type="button" className={`step ${index === current ? "is-current" : ""} ${index < current ? "is-complete" : ""}`} onClick={() => index <= current && onStep(index)} disabled={index > current} aria-current={index === current ? "step" : undefined}><span className="step-number">{index < current ? "✓" : index + 1}</span><span>{label}</span></button>)}</nav>;
+  return <nav className={`stepper stepper-progress-${current} screen-only`} aria-label="Plan progress">{steps.map((label, index) => <button key={label} type="button" className={`step ${index === current ? "is-current" : ""} ${index < current ? "is-complete" : ""}`} onClick={() => index <= current && onStep(index)} disabled={index > current} aria-current={index === current ? "step" : undefined}><span className="step-number">{index === current ? <svg className="route-compass" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="m15.6 8.4-2.1 5.1-5.1 2.1 2.1-5.1 5.1-2.1Z" fill="currentColor"/><circle cx="12" cy="12" r="1.15" fill="white" stroke="none"/></svg> : index < current ? "✓" : index + 1}</span><span>{label}</span></button>)}</nav>;
 }
 
 function StrategyOption({ strategy, selected, onToggle }: { strategy: Strategy; selected: boolean; onToggle: () => void }) {
