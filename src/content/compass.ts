@@ -583,6 +583,131 @@ export const supportAreas: SupportArea[] = [
     ],
   },
   {
+    id: "english-speaking-participation",
+    name: "English-Speaking Participation",
+    tagline: "For multilingual students who rely on their first language with classmates and are reluctant to speak English.",
+    accent: "#0F766E",
+    accentSoft: "#ECFDF5",
+    icon: "globe",
+    intro:
+      "Using a first language is a valuable learning and relationship resource, not misbehavior. This area helps teams understand why a student is avoiding spoken English and create safe, purposeful opportunities to use English without banning the student's home language.",
+    decisionSupport: [
+      "The student may need language, confidence, belonging, or task support rather than stronger consequences.",
+      "Home-language talk can support comprehension and planning before English output.",
+      "The goal is to expand the student's English participation, not replace or devalue their first language.",
+    ],
+    youMightBeHereIf: [
+      "The student speaks readily with same-language peers but rarely uses English with them.",
+      "The student understands more English than they are willing or ready to speak.",
+      "English participation drops during public, unstructured, or academically demanding talk.",
+      "Repeated reminders to speak English have not increased meaningful participation.",
+    ],
+    teacherQuestion:
+      "What would make using a little more English feel useful, achievable, and socially safe?",
+    lookFors: [
+      "Whether the student attempts more English during structured, low-pressure tasks",
+      "Whether rehearsal in the first language leads to stronger English output",
+      "Which partners, topics, group sizes, and sentence supports increase participation",
+    ],
+    meetingPrompts: [
+      "When does the student already use English successfully?",
+      "Is the barrier vocabulary, sentence formation, confidence, peer identity, anxiety, or task clarity?",
+      "Does the student participate more after rehearsal or with a clear communicative role?",
+      "What is one realistic increase in English participation we could observe this week?",
+    ],
+    avoids: [
+      { avoid: "Banning the student's first language", why: "It can reduce belonging, remove a learning resource, and make participation feel punitive." },
+      { avoid: 'Repeatedly saying "English only"', why: "A correction without language support does not teach the student what to say or make speaking safer." },
+      { avoid: "Treating all first-language talk as off-task", why: "Students may be clarifying content, planning a response, or maintaining important peer relationships." },
+      { avoid: "Forcing unprepared public speaking", why: "High-pressure speaking can increase avoidance and hide what the student understands." },
+      { avoid: "Rewarding accent reduction", why: "The goal is understandable, meaningful communication—not sounding like a native speaker." },
+    ],
+    universal: [
+      {
+        title: "Use a planned bridge from L1 to English",
+        level: "Universal",
+        helpsWith: "Students who can develop ideas in their first language but need support turning them into English.",
+        classroomLook:
+          "Let students discuss or plan briefly in their first language, then ask for one English word, sentence, summary, or shared product. Make the transition explicit and predictable.",
+        whenToTry:
+          "When first-language discussion is productive but the student does not yet transfer ideas into English.",
+        tryTomorrow:
+          "Use two minutes of first-language planning followed by one rehearsed English sentence from each partner.",
+        lookFor:
+          "Does planned first-language rehearsal lead to more accurate or confident English participation?",
+        reference:
+          "Translanguaging approaches treat students' full linguistic repertoires as resources while intentionally developing additional language use.",
+      },
+      {
+        title: "Give every student a useful speaking role",
+        level: "Universal",
+        helpsWith: "Students who stay in their first language when English group-talk expectations are vague.",
+        classroomLook:
+          "Assign rotating roles such as summarizer, questioner, evidence finder, or reporter. Provide the exact language each role can use and keep the first attempt brief.",
+        whenToTry:
+          "When the student participates socially but avoids the English needed for the academic task.",
+        tryTomorrow:
+          "Give the student one low-risk role with two visible phrases they can use successfully.",
+        lookFor:
+          "Does a clear purpose and predictable language increase English contributions?",
+      },
+      {
+        title: "Rehearse with sentence starters before sharing",
+        level: "Universal",
+        helpsWith: "Students who understand the task but hesitate because they cannot quickly form an English response.",
+        classroomLook:
+          "Post two or three natural sentence starters, give quiet thinking time, and allow partner rehearsal before asking for a contribution.",
+        whenToTry:
+          "When the student speaks more after hearing a model or having time to prepare.",
+        tryTomorrow:
+          'Offer starters such as "I agree because…," "Our group noticed…," or "Can you explain…?" and rehearse once before discussion.',
+        lookFor:
+          "Does rehearsal improve the frequency or length of the student's English turns?",
+      },
+    ],
+    intervention: [
+      {
+        title: "Map when English speaking already happens",
+        level: "Intervention",
+        helpsWith: "Teams that need to distinguish proficiency, confidence, peer dynamics, and speaking anxiety.",
+        classroomLook:
+          "Track the partner, setting, topic, group size, language demand, preparation time, and type of English response across several days.",
+        whenToTry:
+          "When the student appears able to speak English in some situations but consistently avoids it in others.",
+        tryTomorrow:
+          "Record three moments when English was invited and note what made participation easier or harder.",
+        lookFor:
+          "Is there a repeatable condition in which the student uses more English?",
+      },
+      {
+        title: "Set a small, collaborative participation goal",
+        level: "Intervention",
+        helpsWith: "Students who need a gradual target they understand and help choose.",
+        classroomLook:
+          "Privately agree on a realistic goal, such as one rehearsed English contribution during a specific lesson, and review it without public praise or pressure.",
+        whenToTry:
+          "When general encouragement has not changed participation and the student can help identify a manageable next step.",
+        tryTomorrow:
+          "Ask the student which English-speaking moment feels possible and agree on one specific attempt.",
+        lookFor:
+          "Does participation grow when the goal is predictable, private, and jointly chosen?",
+      },
+      {
+        title: "Use a supported peer bridge",
+        level: "Intervention",
+        helpsWith: "Students whose English participation depends strongly on peer safety and group composition.",
+        classroomLook:
+          "Pair the student with a trusted, supportive peer; allow brief first-language clarification; then structure a shared English response with defined turns.",
+        whenToTry:
+          "When the student communicates comfortably with selected classmates but withdraws in mixed-language or whole-group settings.",
+        tryTomorrow:
+          "Plan one paired response in which both students contribute a prepared English sentence.",
+        lookFor:
+          "Can the student extend English participation from a trusted peer to a wider group over time?",
+      },
+    ],
+  },
+  {
     id: "speaking-anxiety-selective-mutism",
     name: "Speaking Anxiety / Selective Mutism",
     tagline: "For students who can communicate in some settings but freeze, whisper, or avoid speech in school.",
@@ -802,6 +927,12 @@ export const concerns: Concern[] = [
     label: "Writing difficulty",
     summary: "The student cannot get ideas onto paper or becomes stuck by written output demands.",
     supportAreaIds: ["reading-writing", "attention-focus", "emotional-regulation"],
+  },
+  {
+    id: "english-speaking-reluctance",
+    label: "Reluctant to speak English with classmates",
+    summary: "The student regularly uses their first language with peers and avoids or resists speaking English during classroom participation.",
+    supportAreaIds: ["english-speaking-participation", "english-language-overlap", "group-participation", "speaking-anxiety-selective-mutism"],
   },
   {
     id: "peer-conflict",
