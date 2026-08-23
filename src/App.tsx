@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { concerns, supportAreas, type Strategy, type SupportArea } from "@/content/compass";
-import { getProfileStrategies, profiles, type ProfileId, type ProfileStrategy } from "@/content/profiles";
+import { evidenceSources, getProfileStrategies, profiles, type ProfileId, type ProfileStrategy } from "@/content/profiles";
 
 const steps = ["Notice", "Consider", "Choose", "Act"];
 const assetPath = (filename: string) => `${import.meta.env.BASE_URL}${filename}`;
@@ -158,6 +158,17 @@ function App() {
         <aside className="summary-column screen-only" aria-label="Current plan summary"><PlanSummary area={selectedArea} concernLabel={concernLabel} profileLabel={profileLabel} universal={universalStrategies} intervention={interventionStrategies}/><div className="meeting-tip"><span>Meeting tip</span><p>Agree on what the teacher will try, when they will try it, and what the team will watch for.</p></div></aside>
       </div>
     </main>
+    <footer className="evidence-footer screen-only">
+      <details>
+        <summary><span><strong>Evidence &amp; guidance</strong><small>See the sources and how recommendations are described</small></span><span aria-hidden="true">+</span></summary>
+        <div className="evidence-content">
+          <div className="evidence-intro"><p className="eyebrow">Our approach</p><h2>Useful guidance, with its limits visible.</h2><p>Classroom Compass translates authoritative practice guides and professional guidance into small classroom actions. It does not diagnose students, replace an individual plan, or imply that every accommodation has the same level of research support.</p></div>
+          <div className="evidence-key" aria-label="How evidence is described"><div><strong>Evidence-backed practice</strong><p>A broader intervention approach supported by research reviews or authoritative evidence summaries.</p></div><div><strong>Practice-guide recommendation</strong><p>A recommendation taken from a formal practice guide that reports the supporting evidence.</p></div><div><strong>Professional consensus</strong><p>Authoritative implementation guidance where evidence for the exact classroom action may be indirect.</p></div><div><strong>Access accommodation</strong><p>A practical way to reduce a barrier. Helpfulness should be checked with the student rather than assumed.</p></div></div>
+          <div className="source-list"><h3>Sources used in the current strategy library</h3><ul>{evidenceSources.map(source => <li key={source.id}><a href={source.url} target="_blank" rel="noreferrer"><strong>{source.organization}</strong><span>{source.title}</span><span aria-hidden="true">↗</span></a></li>)}</ul></div>
+          <p className="evidence-review-note">Sources were checked in August 2026. Recommendations should be reviewed with relevant specialists and adapted with the student, family, and school team.</p>
+        </div>
+      </details>
+    </footer>
     {step < 3 && selectedConcern && <button type="button" className="mobile-plan-bar screen-only" onClick={() => selectionTotal > 0 && goToStep(3)} disabled={selectionTotal === 0}><PlanSummary compact area={selectedArea} concernLabel={concernLabel} profileLabel={profileLabel} universal={universalStrategies} intervention={interventionStrategies}/><span aria-hidden="true">↑</span></button>}
   </div>;
 }

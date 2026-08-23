@@ -73,6 +73,24 @@ export const profiles: Profile[] = [
 
 export const evidenceSources: EvidenceSource[] = [
   {
+    id: "ies-english-learners",
+    organization: "Institute of Education Sciences / What Works Clearinghouse",
+    title: "Teaching Academic Content and Literacy to English Learners in Elementary and Middle School",
+    url: "https://ies.ed.gov/ncee/wwc/PracticeGuide/19",
+  },
+  {
+    id: "wida-2020-framework",
+    organization: "WIDA",
+    title: "WIDA English Language Development Standards Framework, 2020 Edition",
+    url: "https://wida.wisc.edu/teach/standards/eld/2020",
+  },
+  {
+    id: "asha-selective-mutism",
+    organization: "American Speech-Language-Hearing Association",
+    title: "Selective Mutism Practice Portal",
+    url: "https://www.asha.org/practice-portal/clinical-topics/selective-mutism/",
+  },
+  {
     id: "ies-foundational-reading",
     organization: "Institute of Education Sciences / What Works Clearinghouse",
     title: "Foundational Skills to Support Reading for Understanding in Kindergarten Through 3rd Grade",
