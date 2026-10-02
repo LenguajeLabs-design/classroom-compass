@@ -1,4 +1,4 @@
-export type ProfileId = "dyslexia" | "adhd" | "autism";
+export type ProfileId = "dyslexia" | "dysgraphia" | "dyscalculia" | "adhd" | "autism";
 
 export type ProfileStrategyLevel = "teacher-ready" | "specialist-supported";
 
@@ -44,12 +44,30 @@ export type ProfileStrategy = {
 export const profiles: Profile[] = [
   {
     id: "dyslexia",
-    name: "Dyslexia or reading disability",
+    name: "Specific Learning Disorder in reading",
     shortName: "Dyslexia",
     description:
-      "Use only when a reading disability or dyslexia profile is already known. This refines classroom access and instructional recommendations; it does not identify dyslexia.",
+      "A known or documented learning profile that primarily affects reading. It may involve accurate or fluent word reading, decoding, spelling, or the effort required to read.",
     safeguard:
       "Access tools such as audio and text-to-speech support participation, but they do not replace explicit, systematic reading instruction.",
+  },
+  {
+    id: "dysgraphia",
+    name: "Specific Learning Disorder in written expression",
+    shortName: "Dysgraphia",
+    description:
+      "A known or documented learning profile that primarily affects written expression. It may involve spelling, sentence construction, organizing ideas, handwriting, or producing written work efficiently.",
+    safeguard:
+      "Reduce avoidable transcription barriers while preserving opportunities for explicit writing instruction and meaningful expression.",
+  },
+  {
+    id: "dyscalculia",
+    name: "Specific Learning Disorder in mathematics",
+    shortName: "Dyscalculia",
+    description:
+      "A known or documented learning profile that primarily affects mathematics. It may involve number sense, calculation, recalling mathematical facts, or mathematical reasoning.",
+    safeguard:
+      "Use concrete and visual representations to support understanding; do not assume that speed or fact recall alone represents mathematical ability.",
   },
   {
     id: "adhd",
@@ -91,6 +109,18 @@ export const evidenceSources: EvidenceSource[] = [
     url: "https://www.asha.org/practice-portal/clinical-topics/selective-mutism/",
   },
   {
+    id: "asha-spoken-language",
+    organization: "American Speech-Language-Hearing Association",
+    title: "Spoken Language Disorders Practice Portal",
+    url: "https://www.asha.org/practice-portal/clinical-topics/spoken-language-disorders/",
+  },
+  {
+    id: "asha-speech-sound",
+    organization: "American Speech-Language-Hearing Association",
+    title: "Speech Sound Disorders: Articulation and Phonology",
+    url: "https://www.asha.org/practice-portal/clinical-topics/articulation-and-phonology/",
+  },
+  {
     id: "ies-foundational-reading",
     organization: "Institute of Education Sciences / What Works Clearinghouse",
     title: "Foundational Skills to Support Reading for Understanding in Kindergarten Through 3rd Grade",
@@ -107,6 +137,24 @@ export const evidenceSources: EvidenceSource[] = [
     organization: "International Dyslexia Association",
     title: "Structured Literacy: Effective Instruction for Students with Dyslexia and Related Reading Difficulties",
     url: "https://dyslexiaida.org/structured-literacy-effective-instruction-for-students-with-dyslexia-and-related-reading-difficulties/",
+  },
+  {
+    id: "ies-elementary-writing",
+    organization: "Institute of Education Sciences / What Works Clearinghouse",
+    title: "Teaching Elementary School Students to Be Effective Writers",
+    url: "https://ies.ed.gov/ncee/wwc/PracticeGuide/17/Published",
+  },
+  {
+    id: "ies-elementary-mathematics",
+    organization: "Institute of Education Sciences / What Works Clearinghouse",
+    title: "Assisting Students Struggling with Mathematics: Intervention in the Elementary Grades",
+    url: "https://ies.ed.gov/ncee/wwc/PracticeGuide/26",
+  },
+  {
+    id: "speldnsw-dyscalculia",
+    organization: "SPELD NSW",
+    title: "Dyscalculia",
+    url: "https://www.speldnsw.org.au/information/dyscalculia/",
   },
   {
     id: "cdc-adhd-classroom",
@@ -147,10 +195,10 @@ export const profileStrategies: ProfileStrategy[] = [
     concernIds: ["reading", "shutdown"],
     supportAreaIds: ["reading-writing"],
     level: "specialist-supported",
-    title: "Connect the student to explicit word-reading instruction",
+    title: "Coordinate explicit, systematic word-reading instruction",
     needAddressed: "Accurate decoding, spelling, and recognition of increasingly complex words.",
     teacherAction:
-      "Bring the observed reading pattern to the reading specialist or support team. Align classroom practice with the student’s explicit, systematic decoding and spelling instruction rather than asking the student to infer patterns independently.",
+      "Bring the observed reading pattern to the reading specialist or support team. Align classroom practice with the student's explicit, systematic phonics, decoding, spelling, and word-part instruction rather than asking the student to infer patterns independently.",
     tryTomorrow:
       "Note one recurring word-reading pattern, such as vowel confusion or difficulty breaking apart a multisyllabic word, and share that specific observation with the reading specialist.",
     monitor: [
@@ -160,7 +208,7 @@ export const profileStrategies: ProfileStrategy[] = [
     ],
     evidenceBasis: "practice-guide recommendation",
     evidenceNote:
-      "IES recommends explicit instruction linking speech sounds to letters and teaching students to decode words and analyze word parts. The intervention sequence should be coordinated with trained reading staff.",
+      "IES recommends explicit instruction linking speech sounds to letters and teaching students to decode words and analyze word parts. This aligns with the SSIS emphasis on phonics intervention, sound mapping, morphology, guided practice, and cumulative review.",
     sourceIds: ["ies-foundational-reading", "ies-reading-intervention", "ida-structured-literacy"],
     trainingNeeded: "Coordinate with a reading specialist or trained interventionist.",
     avoid: [
@@ -176,10 +224,10 @@ export const profileStrategies: ProfileStrategy[] = [
     concernIds: ["reading", "shutdown"],
     supportAreaIds: ["reading-writing", "emotional-regulation"],
     level: "teacher-ready",
-    title: "Separate access to ideas from the act of decoding",
+    title: "Use audio or supported reading when decoding is not the goal",
     needAddressed: "Participation in grade-level content while reading skills continue to develop.",
     teacherAction:
-      "Provide accessible text, text-to-speech, an audiobook, or a supported read-aloud when the lesson objective is content knowledge rather than independent decoding.",
+      "Provide text-to-speech, an audiobook, a read-along, or a supported read-aloud when the lesson objective is content knowledge rather than independent decoding.",
     tryTomorrow:
       "Before the lesson, identify whether reading the text independently is the learning goal. If it is not, offer audio or read-aloud access without removing the printed text.",
     monitor: [
@@ -189,7 +237,7 @@ export const profileStrategies: ProfileStrategy[] = [
     ],
     evidenceBasis: "access accommodation",
     evidenceNote:
-      "Audio and text-to-speech provide curriculum access. They should be presented as access tools, not as substitutes for evidence-based reading instruction.",
+      "Audio, read-along, and text-to-speech tools reflect SSIS curriculum-access supports. They provide access to ideas but do not replace explicit reading instruction.",
     sourceIds: ["ies-foundational-reading", "ies-reading-intervention"],
   },
   {
@@ -198,7 +246,7 @@ export const profileStrategies: ProfileStrategy[] = [
     concernIds: ["writing", "shutdown"],
     supportAreaIds: ["reading-writing"],
     level: "teacher-ready",
-    title: "Reduce copying while preserving the thinking",
+    title: "Reduce copying while preserving literacy thinking",
     needAddressed: "Working-memory and transcription load that can hide what a student knows.",
     teacherAction:
       "Provide printed directions or notes, allow keyboarding or speech-to-text when appropriate, and evaluate the intended learning rather than the amount copied from the board.",
@@ -211,7 +259,7 @@ export const profileStrategies: ProfileStrategy[] = [
     ],
     evidenceBasis: "access accommodation",
     evidenceNote:
-      "Reducing unnecessary transcription is an access decision. It should preserve the learning objective and sit alongside, not replace, explicit literacy teaching.",
+      "Reduced copying, printed notes, speech-to-text, and text-to-speech appear in the SSIS accommodations framework. They should preserve the learning objective and sit alongside explicit literacy teaching.",
     sourceIds: ["ida-structured-literacy", "ies-reading-intervention"],
   },
   {
@@ -220,7 +268,7 @@ export const profileStrategies: ProfileStrategy[] = [
     concernIds: ["reading", "group-work", "shutdown"],
     supportAreaIds: ["reading-writing", "group-participation", "emotional-regulation"],
     level: "teacher-ready",
-    title: "Prepare reading before asking for public performance",
+    title: "Rehearse reading before asking for public performance",
     needAddressed: "Practice and participation without surprise exposure or avoidable embarrassment.",
     teacherAction:
       "Give the student advance access to a short passage, allow rehearsal with a trusted partner, and offer a meaningful non-reading role when public oral reading is not the instructional goal.",
@@ -233,7 +281,7 @@ export const profileStrategies: ProfileStrategy[] = [
     ],
     evidenceBasis: "professional consensus",
     evidenceNote:
-      "This combines structured, supported practice with protection from unnecessary public performance. It is not a replacement for direct reading instruction.",
+      "This aligns with the SSIS use of pre-practice, supported participation, and alternative presentation pathways. It is not a replacement for direct reading instruction.",
     sourceIds: ["ida-structured-literacy", "ies-foundational-reading"],
     avoid: [
       {
@@ -241,6 +289,162 @@ export const profileStrategies: ProfileStrategy[] = [
         reason: "It can turn reading difficulty into public performance pressure without providing systematic instruction or useful practice.",
       },
     ],
+  },
+  {
+    id: "dysgraphia-separate-composition-transcription",
+    profileIds: ["dysgraphia"],
+    concernIds: ["writing", "shutdown"],
+    supportAreaIds: ["reading-writing"],
+    level: "teacher-ready",
+    title: "Separate the quality of the idea from the act of handwriting",
+    needAddressed: "Written expression when handwriting, spelling, or transcription effort hides what the student understands.",
+    teacherAction:
+      "Decide whether the lesson is assessing ideas, writing craft, spelling, or handwriting. When handwriting is not the goal, allow keyboarding, speech-to-text, dictation, or an oral response while keeping the thinking demand intact.",
+    tryTomorrow:
+      "Name the learning goal before the task and offer one appropriate alternative way to record the response.",
+    monitor: [
+      "Quality and amount of meaningful content produced",
+      "Time needed to begin and complete the response",
+      "Whether the student can use the access tool with increasing independence",
+    ],
+    evidenceBasis: "access accommodation",
+    evidenceNote:
+      "SSIS guidance includes alternative recording methods, speech-to-text, keyboarding, reduced copying, and adjusted written-output demands. These supports should preserve the intended learning goal.",
+    sourceIds: ["ies-elementary-writing"],
+  },
+  {
+    id: "dysgraphia-plan-rehearse-write",
+    profileIds: ["dysgraphia"],
+    concernIds: ["writing", "shutdown"],
+    supportAreaIds: ["reading-writing"],
+    level: "teacher-ready",
+    title: "Plan and rehearse before writing",
+    needAddressed: "Organizing ideas and constructing sentences without managing every writing demand at once.",
+    teacherAction:
+      "Use a brief graphic organizer, a model, key vocabulary, or sentence frames. Let the student say the idea aloud before writing, then work in one short section at a time.",
+    tryTomorrow:
+      "Ask the student to rehearse one sentence aloud, capture its key words, and then write or type it using a visible model.",
+    monitor: [
+      "Whether oral rehearsal leads to a more complete written idea",
+      "Whether the organizer reduces adult prompting",
+      "Which scaffold the student continues to need",
+    ],
+    evidenceBasis: "practice-guide recommendation",
+    evidenceNote:
+      "IES writing guidance recommends explicitly teaching the writing process and sentence construction. SSIS guidance includes spoken rehearsal, graphic organizers, sentence frames, models, and short distributed practice.",
+    sourceIds: ["ies-elementary-writing"],
+  },
+  {
+    id: "dysgraphia-explicit-writing-transcription",
+    profileIds: ["dysgraphia"],
+    concernIds: ["writing", "shutdown"],
+    supportAreaIds: ["reading-writing"],
+    level: "specialist-supported",
+    title: "Coordinate explicit writing and transcription instruction",
+    needAddressed: "Persistent difficulty with handwriting, spelling, sentence construction, typing, or written organization.",
+    teacherAction:
+      "Share specific writing samples with Learning Support and align classroom scaffolds with the student's explicit instruction. Follow documented fine-motor or occupational-therapy recommendations when those are part of the student's plan.",
+    tryTomorrow:
+      "Collect one short writing sample and note separately what you observe about ideas, sentence construction, spelling, handwriting, and task stamina.",
+    monitor: [
+      "Progress on the explicitly taught writing or transcription skill",
+      "Whether the skill transfers into classroom writing",
+      "Whether access tools reduce barriers without replacing instruction",
+    ],
+    evidenceBasis: "practice-guide recommendation",
+    evidenceNote:
+      "IES recommends teaching handwriting, spelling, sentence construction, typing, and word processing. Individual fine-motor tools should follow observed need and specialist guidance rather than being assigned to every student with the label.",
+    sourceIds: ["ies-elementary-writing"],
+    trainingNeeded: "Coordinate with Learning Support and, when relevant, the student's occupational therapist.",
+  },
+  {
+    id: "dyscalculia-representations",
+    profileIds: ["dyscalculia"],
+    concernIds: ["mathematics", "shutdown"],
+    supportAreaIds: ["mathematics-learning"],
+    level: "teacher-ready",
+    title: "Build the concept with concrete and visual representations",
+    needAddressed: "Connecting quantity, mathematical relationships, symbols, and procedures.",
+    teacherAction:
+      "Use a small, consistent set of manipulatives and drawings that clearly represent the concept. Explicitly connect each part of the representation to the equation and mathematical language.",
+    tryTomorrow:
+      "Model one problem with objects, a diagram, and symbols, then ask the student to explain the connection in their own words.",
+    monitor: [
+      "Whether the student explains the relationship rather than copies a procedure",
+      "Accuracy when moving from the representation to symbols",
+      "Transfer to a new example",
+    ],
+    evidenceBasis: "evidence-backed practice",
+    evidenceNote:
+      "The IES mathematics intervention guide gives a strong-evidence recommendation for well-chosen concrete and semi-concrete representations.",
+    sourceIds: ["ies-elementary-mathematics", "speldnsw-dyscalculia"],
+  },
+  {
+    id: "dyscalculia-number-line",
+    profileIds: ["dyscalculia"],
+    concernIds: ["mathematics"],
+    supportAreaIds: ["mathematics-learning"],
+    level: "teacher-ready",
+    title: "Teach the number line as a reasoning tool",
+    needAddressed: "Magnitude, sequence, operations, fractions, and relationships between numbers.",
+    teacherAction:
+      "Model how to locate, compare, and operate on numbers using a number line. Ask the student to mark and explain the jumps instead of using the line as an unexplained answer aid.",
+    tryTomorrow:
+      "Solve one example together on a number line, label each jump, and then give a parallel example with the same structure.",
+    monitor: [
+      "Accuracy locating and comparing quantities",
+      "Whether the student can explain the direction and size of each jump",
+      "Reduced reliance on guessing or recounting from one",
+    ],
+    evidenceBasis: "evidence-backed practice",
+    evidenceNote:
+      "IES gives a strong-evidence recommendation for using number lines to develop mathematical concepts and procedures.",
+    sourceIds: ["ies-elementary-mathematics"],
+  },
+  {
+    id: "dyscalculia-word-problem-structure",
+    profileIds: ["dyscalculia"],
+    concernIds: ["mathematics"],
+    supportAreaIds: ["mathematics-learning"],
+    level: "teacher-ready",
+    title: "Make word-problem structure and language explicit",
+    needAddressed: "Applying mathematical ideas when language or problem structure adds another barrier.",
+    teacherAction:
+      "Teach the student to identify the situation, the known and unknown quantities, and their relationship before selecting an operation. Use a diagram and consistent mathematical language.",
+    tryTomorrow:
+      "Before calculating, have the student draw the relationship in one word problem and explain what needs to be found.",
+    monitor: [
+      "Whether the student identifies the mathematical relationship",
+      "Choice of operation on a parallel problem",
+      "Whether language clarification changes performance",
+    ],
+    evidenceBasis: "evidence-backed practice",
+    evidenceNote:
+      "IES gives strong-evidence recommendations for deliberate word-problem instruction and explicit mathematical language.",
+    sourceIds: ["ies-elementary-mathematics"],
+  },
+  {
+    id: "dyscalculia-systematic-intervention",
+    profileIds: ["dyscalculia"],
+    concernIds: ["mathematics", "shutdown"],
+    supportAreaIds: ["mathematics-learning"],
+    level: "specialist-supported",
+    title: "Coordinate systematic, cumulative mathematics intervention",
+    needAddressed: "Persistent foundational gaps that require an explicit sequence, guided practice, cumulative review, and progress monitoring.",
+    teacherAction:
+      "Bring specific error patterns and student explanations to Learning Support or the mathematics interventionist. Align classroom tools and language with the intervention sequence rather than adding disconnected drill.",
+    tryTomorrow:
+      "Record one recurring error, the representation used, and what the student says the numbers and symbols mean.",
+    monitor: [
+      "Progress on explicitly taught concepts and procedures",
+      "Retention during cumulative review",
+      "Application of the learning in regular classroom mathematics",
+    ],
+    evidenceBasis: "practice-guide recommendation",
+    evidenceNote:
+      "IES recommends systematic mathematics intervention using clear models, guided practice, representations, mathematical language, and cumulative review. SSIS similarly identifies targeted small-group and individualized mathematics support.",
+    sourceIds: ["ies-elementary-mathematics", "speldnsw-dyscalculia"],
+    trainingNeeded: "Coordinate with Learning Support or a trained mathematics interventionist.",
   },
   {
     id: "adhd-clear-task-entry",

@@ -19,7 +19,7 @@ export type SupportArea = {
   tagline: string;
   accent: string;
   accentSoft: string;
-  icon: "focus" | "shield" | "heart" | "group" | "book" | "globe" | "voice";
+  icon: "focus" | "shield" | "heart" | "group" | "book" | "calculator" | "globe" | "voice";
   intro: string;
   decisionSupport?: string[];
   youMightBeHereIf: string[];
@@ -407,6 +407,191 @@ export const supportAreas: SupportArea[] = [
         classroomLook:
           "Use speech-to-text, text-to-speech, adaptive learning platforms, vocabulary banks, and sentence stems so the student can access content and express ideas with less bottleneck.",
         whenToTry: "When the barrier is no longer just strategy, but access to the task itself.",
+      },
+    ],
+  },
+  {
+    id: "mathematics-learning",
+    name: "Mathematics Learning",
+    tagline: "For students who need clearer access to number concepts, calculation, mathematical language, or problem-solving.",
+    accent: "#7C3AED",
+    accentSoft: "#F5F3FF",
+    icon: "calculator",
+    intro:
+      "Mathematics difficulty is not always about effort or remembering facts. A student may need a concept represented differently, clearer mathematical language, smaller instructional steps, or more systematic practice.",
+    decisionSupport: [
+      "Look for the mathematical idea the student understands, not only whether the final answer is correct.",
+      "Separate difficulty with mathematical language from difficulty with the underlying concept.",
+      "Use tools to reveal thinking rather than treating speed as the main sign of ability.",
+    ],
+    youMightBeHereIf: [
+      "The student struggles to connect quantities, symbols, and mathematical procedures.",
+      "The student loses track of steps during calculation or problem-solving.",
+      "Mathematics facts are difficult to retrieve even after practice.",
+      "The language or layout of a word problem hides what the student understands.",
+    ],
+    teacherQuestion: "Is the barrier the mathematical concept, the language, remembering the steps, or showing the reasoning efficiently?",
+    lookFors: [
+      "Whether a concrete or visual model improves explanation and accuracy",
+      "Whether visible steps reduce errors and adult prompting",
+      "Whether the student can apply the idea in a new example",
+    ],
+    avoids: [
+      { avoid: "Using speed as the main measure of mathematical ability", why: "Slow retrieval can hide sound reasoning and conceptual understanding." },
+      { avoid: "Moving to symbols before the representation makes sense", why: "Procedures are harder to retain when they are disconnected from quantity and meaning." },
+      { avoid: "Giving more of the same worksheet after repeated errors", why: "Practice should follow clear teaching and feedback rather than rehearse a misconception." },
+    ],
+    universal: [
+      {
+        title: "Connect concrete materials, drawings, and symbols",
+        level: "Universal",
+        helpsWith: "Students who can follow a procedure but do not yet understand what the quantities or operations mean.",
+        classroomLook:
+          "Model the same idea with manipulatives, a drawing or diagram, and the corresponding equation. Ask the student to explain how the representations connect.",
+        whenToTry: "When symbols feel arbitrary, procedures are quickly forgotten, or the student cannot explain an answer.",
+        tryTomorrow: "Choose one key problem and show it with objects, a quick drawing, and an equation before independent practice.",
+        lookFor: "Can the student move between the representations and explain what each part means?",
+        reference: "IES recommends well-chosen concrete and semi-concrete representations to build mathematical concepts and procedures.",
+      },
+      {
+        title: "Make the steps and mathematical language visible",
+        level: "Universal",
+        helpsWith: "Students who lose track of a procedure or cannot hold several mathematical steps in mind.",
+        classroomLook:
+          "Use a worked example, a short step card, consistent mathematical vocabulary, and enough space to show one operation at a time. Keep the visual available during practice.",
+        whenToTry: "When the student begins correctly but skips, reverses, or forgets steps.",
+        tryTomorrow: "Create a three-step worked example and leave it beside one similar problem for the student to complete.",
+        lookFor: "Does the student complete more steps independently and explain the language accurately?",
+        reference: "IES recommends systematic instruction and explicit teaching of clear, concise mathematical language.",
+      },
+      {
+        title: "Use number lines and visual references as thinking tools",
+        level: "Universal",
+        helpsWith: "Students who need a stable visual for magnitude, sequence, operations, fractions, or calculation relationships.",
+        classroomLook:
+          "Provide and explicitly teach the use of number lines, hundreds charts, arrays, fact tables, or other relevant references. Model how to use the tool rather than only placing it on the desk.",
+        whenToTry: "When the student counts inefficiently, loses magnitude, or cannot see relationships between numbers.",
+        tryTomorrow: "Model one problem on a number line, then ask the student to annotate the jumps for a parallel problem.",
+        lookFor: "Does the visual help the student reason more accurately with less guessing?",
+        reference: "IES identifies number lines as a strong-evidence support for learning mathematical concepts and procedures.",
+      },
+      {
+        title: "Unpack word problems before calculating",
+        level: "Universal",
+        helpsWith: "Students whose mathematical understanding is hidden by language, layout, or uncertainty about the problem structure.",
+        classroomLook:
+          "Read for the situation first, identify what is known and unknown, represent the relationship, and only then choose an operation. Clarify vocabulary without telling the student which operation to use.",
+        whenToTry: "When the student can calculate in isolation but struggles to apply the same idea in a word problem.",
+        tryTomorrow: "Use one problem to mark the known information, the question, and a visual representation before writing an equation.",
+        lookFor: "Can the student explain the relationship and choose an operation for a similar problem?",
+        reference: "IES recommends deliberate instruction in word-problem structures and mathematical language.",
+      },
+    ],
+    intervention: [
+      {
+        title: "Provide systematic small-group mathematics intervention",
+        level: "Intervention",
+        helpsWith: "Students who need an explicit instructional sequence, guided practice, and more feedback than whole-class teaching provides.",
+        classroomLook:
+          "Coordinate a focused sequence that models the concept, uses representations, prompts student explanation, provides guided practice, and gradually removes support while monitoring progress.",
+        whenToTry: "When well-matched classroom supports have been used consistently but the same foundational difficulty persists.",
+        reference: "The IES elementary mathematics intervention guide gives strong-evidence recommendations for systematic instruction, representations, mathematical language, number lines, and word problems.",
+      },
+      {
+        title: "Use cumulative review tied to conceptual understanding",
+        level: "Intervention",
+        helpsWith: "Students who understand during a lesson but do not retain or retrieve the learning reliably over time.",
+        classroomLook:
+          "Use short, distributed review of previously taught ideas, mix old and new examples, and provide immediate corrective feedback. Track accuracy, strategy use, and transfer—not speed alone.",
+        whenToTry: "When the student repeatedly relearns the same skill or cannot apply it after a gap in time.",
+        reference: "SSIS guidance includes spiral review, guided practice, repeated practice, and overlearning; use these within a conceptually coherent sequence.",
+      },
+    ],
+  },
+  {
+    id: "speech-language",
+    name: "Speech and Language",
+    tagline: "For students who need support understanding spoken language, expressing ideas, speaking clearly, or joining conversations.",
+    accent: "#0F766E",
+    accentSoft: "#ECFDF5",
+    icon: "voice",
+    intro:
+      "Speech and language concerns can affect how a student understands classroom talk, expresses ideas, produces speech sounds, or participates in conversation. Teachers can reduce communication barriers without trying to identify or diagnose the cause.",
+    decisionSupport: [
+      "Understanding spoken language and expressing ideas are different skills.",
+      "Speech clarity is different from the quality of a student's thinking.",
+      "For multilingual learners, compare communication across languages and contexts before interpreting an English-language pattern as a disorder.",
+    ],
+    youMightBeHereIf: [
+      "The student frequently misunderstands spoken directions or questions.",
+      "The student has ideas but struggles to find words or form a complete response.",
+      "Speech is difficult for unfamiliar listeners to understand.",
+      "The student finds turn-taking, staying on topic, or conversational entry difficult.",
+    ],
+    teacherQuestion: "Is the barrier understanding language, expressing an idea, producing speech clearly, or knowing how to enter the conversation?",
+    lookFors: [
+      "Whether shorter language and visual support improve understanding",
+      "Whether additional wait time or response choices increase expression",
+      "Whether the pattern appears across people, tasks, settings, or languages",
+    ],
+    avoids: [
+      { avoid: "Treating first-language use or an accent as a disorder", why: "Multilingual development and language difference are not evidence of a speech or language disorder." },
+      { avoid: "Repeated public correction or forced repetition", why: "It can increase communication pressure without teaching the student what they need." },
+      { avoid: "Assuming unclear speech means unclear thinking", why: "Speech production can mask a student's understanding and ideas." },
+    ],
+    universal: [
+      {
+        title: "Make spoken language easier to process",
+        level: "Universal",
+        helpsWith: "Students who lose meaning when instructions, explanations, or questions are long or delivered quickly.",
+        classroomLook:
+          "Gain the student's attention, use concise sentences, break information into short parts, pair key language with visuals or demonstration, and check understanding without asking only, ‘Do you understand?’",
+        whenToTry: "When the student starts the wrong task, misses key information, or needs spoken directions repeated.",
+        tryTomorrow: "Give one short direction with a visual cue, pause, and ask the student to show or explain the first step.",
+        lookFor: "Does the student begin more accurately and need fewer repeated directions?",
+        reference: "ASHA guidance supports visual information, adjusted speaking rate, repetition, and comprehension checks for students with spoken-language needs.",
+      },
+      {
+        title: "Give time and structure for expressing ideas",
+        level: "Universal",
+        helpsWith: "Students who know what they want to communicate but need more time or language structure to express it.",
+        classroomLook:
+          "Allow additional response time, provide sentence starters or key vocabulary, offer rehearsal with a partner, and accept speaking, writing, pointing, drawing, or an established communication system when these show the same learning.",
+        whenToTry: "When a student gives very short responses, struggles to find words, or withdraws during fast-paced discussion.",
+        tryTomorrow: "Preview one question, provide a sentence starter, and wait quietly before inviting the response.",
+        lookFor: "Does the student communicate a fuller idea when time and structure are available?",
+        reference: "ASHA guidance emphasizes supporting functional communication and matching support to the student's communication needs.",
+      },
+      {
+        title: "Model clear speech without putting the student on display",
+        level: "Universal",
+        helpsWith: "Students whose speech sounds, fluency, or intelligibility make classroom participation more effortful.",
+        classroomLook:
+          "Listen for meaning, respond naturally, and model the word or sentence correctly rather than requiring repeated public correction. Reduce background noise and confirm meaning respectfully when needed.",
+        whenToTry: "When speech differences make a student harder to understand or reluctant to contribute.",
+        tryTomorrow: "Respond first to the student's idea, then naturally restate the message using clear speech without asking for a public repetition.",
+        lookFor: "Does communication continue with less frustration or withdrawal?",
+        reference: "ASHA distinguishes speech-sound production from language and recommends assessment and treatment by qualified speech-language professionals when indicated.",
+      },
+    ],
+    intervention: [
+      {
+        title: "Track the communication pattern before drawing conclusions",
+        level: "Intervention",
+        helpsWith: "Teams that need clearer evidence about when and how the communication difficulty appears.",
+        classroomLook:
+          "Record a few neutral examples across tasks, listeners, settings, and response modes. For multilingual learners, consult EAL or L1 staff and consider what happens in each language before interpreting the pattern.",
+        whenToTry: "When the concern persists despite classroom access supports or the team is unsure whether it reflects language difference, task demands, or a broader communication need.",
+        reference: "ASHA emphasizes culturally and linguistically appropriate assessment and cautions that screening or classroom observation does not itself establish a diagnosis.",
+      },
+      {
+        title: "Coordinate supports with the speech-language or student-services team",
+        level: "Intervention",
+        helpsWith: "Students who need a consistent, individualized communication approach across adults and settings.",
+        classroomLook:
+          "Bring specific observations and examples to Student Services or the student's speech-language professional. Use shared visual, verbal, or augmentative communication supports from the student's plan consistently in class.",
+        whenToTry: "When communication continues to limit access, participation, relationships, or the student's ability to express needs.",
+        reference: "ASHA identifies speech-language pathologists as the professionals who assess and treat speech and language disorders and recommends collaboration with families and educational teams.",
       },
     ],
   },
@@ -927,6 +1112,18 @@ export const concerns: Concern[] = [
     label: "Writing difficulty",
     summary: "The student cannot get ideas onto paper or becomes stuck by written output demands.",
     supportAreaIds: ["reading-writing", "attention-focus", "emotional-regulation"],
+  },
+  {
+    id: "mathematics",
+    label: "Difficulty with mathematics tasks",
+    summary: "The student struggles with number concepts, calculation, mathematical language, or solving problems independently.",
+    supportAreaIds: ["mathematics-learning", "attention-focus", "reading-writing", "english-language-overlap"],
+  },
+  {
+    id: "speech-language-concerns",
+    label: "Speech and language concerns",
+    summary: "The student may have difficulty understanding spoken language, expressing ideas, speaking clearly, or participating in conversations.",
+    supportAreaIds: ["speech-language", "english-language-overlap", "group-participation", "reading-writing"],
   },
   {
     id: "english-speaking-reluctance",
